@@ -1,2 +1,7 @@
 nose
 sphinx
+requests
+json
+apscheduler
+datetime
+click
