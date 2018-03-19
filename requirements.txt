@@ -1,7 +1,11 @@
 nose
 sphinx
+<<<<<<< HEAD
 requests
 json
 apscheduler
 datetime
 click
+=======
+apscheduler 
+>>>>>>> 08d09fc966cfacd4b9ed89574a95909d8fa17387
