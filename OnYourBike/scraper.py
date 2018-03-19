@@ -1,6 +1,4 @@
 import pprint
-import re
-import urllib.request, json
 import requests
 import json
 from apscheduler.schedulers.blocking import BlockingScheduler

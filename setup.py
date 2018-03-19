@@ -20,6 +20,10 @@ setup(
     author_email='thomas.anderson@ucdconnect.ie',
     url='https://github.com/atreanor/OnYourBike',
     license=license,
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    entry_points = {
+    'console_scripts': [
+        'oyb=OnYourBike.core:main',
+    ],
+    },
 )
-
