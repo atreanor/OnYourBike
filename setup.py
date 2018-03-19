@@ -12,13 +12,13 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='sample',
+    name='OnYourBike',
     version='0.1.0',
-    description='Sample package for Python-Guide.org',
+    description='A Python package for OnYourBike',
     long_description=readme,
-    author='Kenneth Reitz',
-    author_email='me@kennethreitz.com',
-    url='https://github.com/kennethreitz/samplemod',
+    author='Sheena Davitt, Alan Treanor, Thomas Anderson',
+    author_email='thomas.anderson@ucdconnect.ie',
+    url='https://github.com/atreanor/OnYourBike',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
 )
