@@ -1,21 +1,49 @@
 import pprint
 import re
+import urllib.request, json
 import requests
+import json
+from apscheduler.schedulers.blocking import BlockingScheduler
+
 import sys
 sys.path.append('.')
 
 class Bike_scraper:
 
-    def __init__(self, n):
-        self.lbSize = n
-        self.light_board = [[0]*n for _ in range(n)]
+    def __init__(self, contract, apikey):
+        self.contract = contract
+        self.apikey = apikey
+        self.__main__(contract)
 
-    def LB_statistics(self, n, instructions):
-        number_off = sum(i.count(0) for i in self.light_board)
-        number_on = sum(i.count(1) for i in self.light_board)
-        print("Number of instructions: {:0,.0f}".format(len(instructions)))
-        print("Size of light board: {:0,.0f}".format(n), "rows, {:0,.0f}".format(n), "columns", "and {:0,.0f}".format(n*n), "light bulbs")
-        print("Lights on: {:0,.0f}".format(number_on))
-        print("Lights off: {:0,.0f}".format(number_off))
-        print("Sum of on and off: {:0,.0f}".format(number_on + number_off))
+    def __main__(self, contract):
+        print("main method automatically called")
+        scheduler = BlockingScheduler()
+        scheduler.add_job(self.scrape(contract), 'interval', seconds=10)
+        scheduler.start()
+        return 0
+
+    def scrape(self, contract):
+        print(self.apikey)
+        api_url = "https://api.jcdecaux.com/vls/v1/stations?contract="+self.contract+"&apiKey="+self.apikey+""
+        response = requests.get(api_url)
+        print(response.status_code)
+        parsed_json = json.loads(response.content)
+
+        #save to a file:
+        with open('data.txt', 'w') as outfile:
+            json.dump(parsed_json, outfile)
+        count = 0
+        for i in parsed_json:
+            number = (i['number'])
+            name = (i['name'])
+            address = (i['address'])
+            status = (i['status'])
+            lat = i['position']['lat']
+            lng = i['position']['lng']
+            count +=1
+            print(count,number, name, address, status, lat, lng)
+
+        #pprint.pprint(parsed_json)
+        #print(len(parsed_json))
+        #print(response.url)
         return 0
