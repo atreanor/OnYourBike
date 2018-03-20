@@ -14,8 +14,8 @@ click.disable_unicode_literals_warning = True
 
 def main(input):
     """Console script for led_tester."""
-
-    print("Input(path/URL):", input)
+    print("Welcome to OnYourBike")
+    #print("Input(path/URL):", input)
     # Process input to get n
 
     contract = "Dublin"
