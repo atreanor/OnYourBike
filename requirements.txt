@@ -3,4 +3,4 @@ sphinx
 requests
 click
 apscheduler 
-
+daemon
