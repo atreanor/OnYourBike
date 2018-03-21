@@ -27,6 +27,8 @@ class Bike_scraper:
         api_url = "https://api.jcdecaux.com/vls/v1/stations?contract="+self.contract+"&apiKey="+self.apikey+""
         response = requests.get(api_url)
         parsed_json = json.loads(response.content)
+        #dbobj = Databaser()
+        #dbobj.createstatictable()
         '''
         #save to a file:
         with open('data.txt', 'w') as outfile:
@@ -44,6 +46,7 @@ class Bike_scraper:
             bonus = (i['bonus'])
             count +=1
             #print(count,number, contract_name, name, address, lat, lng, banking, bonus)
+            #dbobj.inserter_static(number, contract_name, name, address, lat, lng, banking, bonus)
 
         print("Scheduler called scrape_static method,", "Response status code:", response.status_code, ", Time:", datetime.datetime.now())
 
@@ -53,6 +56,9 @@ class Bike_scraper:
         response = requests.get(api_url)
         #print(response.status_code)
         parsed_json = json.loads(response.content)
+        #dbobj1 = Databaser()
+        #dbobj1.createdynamictable()
+        
         '''
         #save to a file:
         with open('data.txt', 'w') as outfile:
@@ -70,6 +76,8 @@ class Bike_scraper:
             #lu_seconds = last_update / 1000
             #dt_obj = datetime.datetime.fromtimestamp(lu_seconds)
             #print(count,number, status, bike_stands, available_bike_stands, available_bikes, dt_obj)
+            #dbobj1.inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, last_update)
+
         print("Scheduler called scrape_dynamic method,", "Response status code:", response.status_code, datetime.datetime.now())
 
         #pprint.pprint(parsed_json)
