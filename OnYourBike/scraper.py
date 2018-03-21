@@ -16,9 +16,9 @@ class Bike_scraper:
 
     def __main__(self, contract):
         self.scrape_static()
-        print("scrape_static method called")
+        print("scrape_static method called (interval is 5 minutes)")
         scheduler = BlockingScheduler()
-        scheduler.add_job(self.scrape_dynamic, 'interval', seconds=10)
+        scheduler.add_job(self.scrape_dynamic, 'interval', minutes=5)
         scheduler.start()
         return 0
 
@@ -67,8 +67,8 @@ class Bike_scraper:
             available_bikes = (i['available_bikes'])
             last_update = (i['last_update'])
             count +=1
-            lu_seconds = last_update / 1000
-            dt_obj = datetime.datetime.fromtimestamp(lu_seconds)
+            #lu_seconds = last_update / 1000
+            #dt_obj = datetime.datetime.fromtimestamp(lu_seconds)
             #print(count,number, status, bike_stands, available_bike_stands, available_bikes, dt_obj)
         print("Scheduler called scrape_dynamic method,", "Response status code:", response.status_code, datetime.datetime.now())
 
