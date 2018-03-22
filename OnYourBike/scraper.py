@@ -1,84 +1,49 @@
-import pprint
 import requests
 import json
-from apscheduler.schedulers.blocking import BlockingScheduler
-import datetime
 
 import sys
 sys.path.append('.')
 
+
 class Bike_scraper:
+    parsed_json = None
 
     def __init__(self, contract, apikey):
         self.contract = contract
         self.apikey = apikey
-        self.__main__(contract)
+        return None
 
-    def __main__(self, contract):
-        self.scrape_static()
-        print("scrape_static method called (interval is 5 minutes)")
-        scheduler = BlockingScheduler()
-        scheduler.add_job(self.scrape_dynamic, 'interval', minutes=5)
-        scheduler.start()
-        return 0
-
-    def scrape_static(self):
+    def scrape_jcdecaux(self):
         contract = self.contract
         api_url = "https://api.jcdecaux.com/vls/v1/stations?contract="+self.contract+"&apiKey="+self.apikey+""
         response = requests.get(api_url)
-        parsed_json = json.loads(response.content)
-        #dbobj = Databaser()
-        #dbobj.createstatictable()
-        '''
-        #save to a file:
-        with open('data.txt', 'w') as outfile:
-            json.dump(parsed_json, outfile)
-        '''
-        count = 0
-        for i in parsed_json:
-            number = (i['number'])
-            contract_name = (i['contract_name'])
-            name = (i['name'])
-            address = (i['address'])
-            lat = i['position']['lat']
-            lng = i['position']['lng']
-            banking = (i['banking'])
-            bonus = (i['bonus'])
-            count +=1
-            #print(count,number, contract_name, name, address, lat, lng, banking, bonus)
-            #dbobj.inserter_static(number, contract_name, name, address, lat, lng, banking, bonus)
+        json_response = json.loads(response.content)
+        print("Scrape response status:", response.status_code)
+        return json_response
 
-        print("Scheduler called scrape_static method,", "Response status code:", response.status_code, ", Time:", datetime.datetime.now())
+    def parse_json(self, i):
+        #print('Entry : {}'.format(i))
+        number = (i['number'])
+        contract_name = (i['contract_name'])
+        name = (i['name'])
+        address = (i['address'])
+        lat = i['position']['lat']
+        lng = i['position']['lng']
+        banking = (i['banking'])
+        bonus = (i['bonus'])
+        #print(number, contract_name, name, address, lat, lng, banking, bonus)
+        return number, contract_name, name, address, lat, lng, banking, bonus
 
-    def scrape_dynamic(self):
-        contract = self.contract
-        api_url = "https://api.jcdecaux.com/vls/v1/stations?contract="+self.contract+"&apiKey="+self.apikey+""
-        response = requests.get(api_url)
-        #print(response.status_code)
-        parsed_json = json.loads(response.content)
-        #dbobj1 = Databaser()
-        #dbobj1.createdynamictable()
-        
-        '''
-        #save to a file:
-        with open('data.txt', 'w') as outfile:
-            json.dump(parsed_json, outfile)
-        '''
-        count = 0
-        for i in parsed_json:
+    def parse_dynamic(self, dynamic_json):
+        for i in dynamic_json:
             number = (i['number'])
             status = (i['status'])
             bike_stands = (i['bike_stands'])
             available_bike_stands = (i['available_bike_stands'])
             available_bikes = (i['available_bikes'])
             last_update = (i['last_update'])
-            count +=1
-            #lu_seconds = last_update / 1000
-            #dt_obj = datetime.datetime.fromtimestamp(lu_seconds)
-            #print(count,number, status, bike_stands, available_bike_stands, available_bikes, dt_obj)
-            #dbobj1.inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, last_update)
-
-        print("Scheduler called scrape_dynamic method,", "Response status code:", response.status_code, datetime.datetime.now())
+            # dbobj1.inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, last_update)
+        return 0
 
         #pprint.pprint(parsed_json)
         #print(len(parsed_json))
