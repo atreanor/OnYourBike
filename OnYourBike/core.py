@@ -7,8 +7,9 @@ sys.path.append('.')
 from time import sleep
 
 #Import files for classes
-from OnYourBike import scraper
-from OnYourBike import databaser
+import scraper
+import databaser
+#from databaser import Databaser
 
 #from tests import test_basic
 
@@ -31,15 +32,13 @@ def main(input):
     # Static data - Call the method to scrape Dublin data and return json
     static_data = x.scrape_jcdecaux()
     print("test")
-    # Create object of Databaser class so that parsed information can be added to the database
-    dbobj = databaser.Databaser()
     print("another test")
-    print(dbobj, "initialized")
+    databaser.connector()
     # Call parse_json method to parse the json response
     for i in static_data:
         number, contract_name, name, address, lat, lng, banking, bonus = x.parse_json(i)
         # Call method to add static information to database
-        #dbobj.inserter_static(number, contract_name, name, address, lat, lng, banking, bonus)
+        databaser.inserter_static(number, contract_name, name, address, lat, lng, banking, bonus)
 
     # The scheduler schedules scraping of dynamic data from JCDecaux
     def scheduler():
@@ -53,7 +52,7 @@ def main(input):
             except NameError as e:
                 print("Name error")
                 print(e)
-                sleep(300)
+                sleep(10)
                 exit()
 
             except KeyboardInterrupt as e:

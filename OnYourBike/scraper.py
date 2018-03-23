@@ -1,7 +1,10 @@
 import requests
 import json
-
+import databaser
+from databaser import *
 import sys
+import core
+import datetime
 sys.path.append('.')
 
 
@@ -34,15 +37,26 @@ class Bike_scraper:
         #print(number, contract_name, name, address, lat, lng, banking, bonus)
         return number, contract_name, name, address, lat, lng, banking, bonus
 
+# start=0
+#  
+# for start to lenght of dynamic json
+#  
+# at end - increment start by lenght of dynamic json
+
+
     def parse_dynamic(self, dynamic_json):
+        start = 0
         for i in dynamic_json:
+            print(i)
             number = (i['number'])
             status = (i['status'])
             bike_stands = (i['bike_stands'])
             available_bike_stands = (i['available_bike_stands'])
             available_bikes = (i['available_bikes'])
             last_update = (i['last_update'])
-            # dbobj1.inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, last_update)
+            lu_sec = last_update/1000
+            lu_dt = datetime.datetime.fromtimestamp(lu_sec)
+            inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
         return 0
 
         #pprint.pprint(parsed_json)
