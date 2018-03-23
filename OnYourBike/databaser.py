@@ -1,35 +1,14 @@
 import MySQLdb
-import scraper
-import time
-import datetime
-
-def main():
-    x = Databaser()
-    x.db.close()
-
 
 class Databaser:
-    
+
     def __init__(self):
         self.db = MySQLdb.connect(host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
                          user="Admin",         # your username
                          passwd="UCD_2018",  # your password
                          db="OnYourBikeMySQL")        # name of the data base
         self.cur = self.db.cursor()
-        
-    def createstatictable(self):
-        self.cur.execute("DROP TABLE IF EXISTS static")
-        self.sql = """CREATE TABLE static (number INT,
-        contract_name CHAR(20),
-        name CHAR(20),
-        address CHAR(20),
-        lat FLOAT,
-        lng FLOAT,
-        banking CHAR(20),
-        bonus CHAR(20)        )"""
-        self.cur.execute(self.sql) 
 
-        
     def inserter_static(self, a, b, c, d, e, f, g, h):
         self.num=a
         self.con=b
@@ -49,20 +28,7 @@ class Databaser:
         except:
            self.db.rollback()
       
-    
-        
-    def createdynamictable(self):
-        self.cur.execute("DROP TABLE IF EXISTS dynamic")
-        self.sql = """CREATE TABLE dynamic (
-        number INT NOT NULL,
-        status CHAR(10),
-        bike_stands INT,
-        available_bike_stands INT,
-        available_bikes INT,
-        last_update DATETIME
-        )"""
-        self.cur.execute(self.sql) 
-        
+
     def inserter_dynamic(self, a, b, c, d, e, f):
         self.num=a
         self.status=b
@@ -80,7 +46,5 @@ class Databaser:
            return print("inserted into db")
         except:
            self.db.rollback()
-                              
-main()
 
 

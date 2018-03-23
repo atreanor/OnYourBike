@@ -2,12 +2,14 @@
 
 """Console script for led_tester."""
 import sys
-from time import sleep
 sys.path.append('.')
+
+from time import sleep
 
 #Import files for classes
 from OnYourBike import scraper
-#from OnYourBike import databaser
+from OnYourBike import databaser
+
 #from tests import test_basic
 
 import click
@@ -24,19 +26,20 @@ def main(input):
 
     contract = "Dublin"
     apikey = "e8823ad03eaa6b4b5b80b84203e56c1740394008"
-    # Initiate Light_board class to define light_board with n
     print("Scrape static")
     x = scraper.Bike_scraper(contract, apikey)
     # Static data - Call the method to scrape Dublin data and return json
     static_data = x.scrape_jcdecaux()
+    print("test")
     # Create object of Databaser class so that parsed information can be added to the database
-    # dbobj = Databaser()
-
+    dbobj = databaser.Databaser()
+    print("another test")
+    print(dbobj, "initialized")
     # Call parse_json method to parse the json response
     for i in static_data:
         number, contract_name, name, address, lat, lng, banking, bonus = x.parse_json(i)
         # Call method to add static information to database
-        # dbobj.inserter_static(number, contract_name, name, address, lat, lng, banking, bonus)
+        #dbobj.inserter_static(number, contract_name, name, address, lat, lng, banking, bonus)
 
     # The scheduler schedules scraping of dynamic data from JCDecaux
     def scheduler():
@@ -64,7 +67,7 @@ def main(input):
             #    print(ex)
             #    exit()
         return 0
-    #
+
     scheduler()
 
     return 0
