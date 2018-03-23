@@ -1,12 +1,28 @@
 import MySQLdb
 
 
-def connector():
-    db = MySQLdb.connect(host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
-                     user="Admin",         # your username
-                     passwd="UCD_2018",  # your password
-                     db="OnYourBikeMySQL")        # name of the data base
-    cur = db.cursor()
+# def connector():
+#     db = MySQLdb.connect(host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
+#                      user="Admin",         # your username
+#                      passwd="UCD_2018",  # your password
+#                      db="OnYourBikeMySQL")        # name of the data base
+#     cur = db.cursor()
+
+# def connector():
+#     db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+#                      user="root",         # your username
+#                      passwd="root",  # your password
+#                      db="mydb")        # name of the data base
+#     cur = db.cursor()
+    
+
+db = MySQLdb.connect(host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
+                 user="Admin",         # your username
+                 passwd="UCD_2018",  # your password
+                 db="OnYourBikeMySQL")        # name of the data base
+cur = db.cursor()
+
+
 
 def inserter_static(a, b, c, d, e, f, g, h):
     num=a

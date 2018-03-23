@@ -33,7 +33,9 @@ def main(input):
     static_data = x.scrape_jcdecaux()
     print("test")
     print("another test")
-    databaser.connector()
+    # call connector function
+    #databaser.connector()
+    
     # Call parse_json method to parse the json response
     for i in static_data:
         number, contract_name, name, address, lat, lng, banking, bonus = x.parse_json(i)

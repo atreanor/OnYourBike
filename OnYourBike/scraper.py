@@ -22,6 +22,7 @@ class Bike_scraper:
         response = requests.get(api_url)
         json_response = json.loads(response.content)
         print("Scrape response status:", response.status_code)
+        #print(json_response)
         return json_response
 
     def parse_json(self, i):
@@ -56,10 +57,8 @@ class Bike_scraper:
             last_update = (i['last_update'])
             lu_sec = last_update/1000
             lu_dt = datetime.datetime.fromtimestamp(lu_sec)
+            print(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
             inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
         return 0
 
-        #pprint.pprint(parsed_json)
-        #print(len(parsed_json))
-        #print(response.url)
-        return 0
+    
