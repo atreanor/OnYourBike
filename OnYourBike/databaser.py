@@ -47,6 +47,7 @@ def inserter_static(a, b, c, d, e, f, g, h):
     try:
        cur.execute(sql)
        db.commit()
+       print("Static data - SQL statement executed")
     except:
        db.rollback()
 
@@ -61,10 +62,11 @@ def inserter_dynamic(a, b, c, d, e, f):
     sql = "INSERT INTO dynamic_test4 (number, \
              status, bike_stands, available_bike_stands, available_bikes, last_update) \
            VALUES ('%d', '%s', '%d', '%d', '%d', '%s' )" % \
-           (num, status, bikestands, avail, availbikes, last)   
+           (num, status, bikestands, avail, availbikes, last)
     try:
         cur.execute(sql)
         db.commit()
+        #print("Dynamic data - SQL statement executed")
     except:
         db.rollback()
     

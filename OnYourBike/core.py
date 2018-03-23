@@ -3,16 +3,13 @@
 """Console script for led_tester."""
 import sys
 sys.path.append('.')
-import databaser
-from databaser import *
+import datetime
+import time
+from OnYourBike import scraper
+from OnYourBike import databaser
 
 
 from time import sleep
-
-#Import files for classes
-import scraper
-
-#from databaser import Databaser
 
 #from tests import test_basic
 
@@ -28,13 +25,12 @@ def main(input):
     #print("Input(path/URL):", input)
     contract = "Dublin"
     apikey = "e8823ad03eaa6b4b5b80b84203e56c1740394008"
-    print("Scrape static")
     x = scraper.Bike_scraper(contract, apikey)
     # Static data - Call the method to scrape Dublin data and return json
+    print("Request static data")
     static_data = x.scrape_jcdecaux()
-    # call connector functiond
+    # call connector function
     databaser.connector()
-    print("connected")
     
     # Call parse_json method to parse the json response
     for i in static_data:
@@ -46,10 +42,10 @@ def main(input):
     def scheduler():
         while True:
             try:
-                print("Scrape dynamic")
+                print("Request Dynamic data - Executed by scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
                 dynamic_json = x.scrape_jcdecaux()
                 x.parse_dynamic(dynamic_json)
-                sleep(5)
+                sleep(300)
 
             except NameError as e:
                 print("Name error")
