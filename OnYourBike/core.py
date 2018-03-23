@@ -31,10 +31,9 @@ def main(input):
     x = scraper.Bike_scraper(contract, apikey)
     # Static data - Call the method to scrape Dublin data and return json
     static_data = x.scrape_jcdecaux()
-    print("test")
-    print("another test")
     # call connector function
-    #databaser.connector()
+    databaser.connector()
+    print("connected")
     
     # Call parse_json method to parse the json response
     for i in static_data:

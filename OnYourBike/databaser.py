@@ -1,12 +1,15 @@
+# coding=utf-8
 import MySQLdb
 
 
-# def connector():
-#     db = MySQLdb.connect(host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
-#                      user="Admin",         # your username
-#                      passwd="UCD_2018",  # your password
-#                      db="OnYourBikeMySQL")        # name of the data base
-#     cur = db.cursor()
+def connector():
+    db = MySQLdb.connect(
+        host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
+        user="Admin",         # your username
+        passwd="UCD_2018",  # your password
+        db="OnYourBikeMySQL")# name of the data base
+    print("Connected to AWS RDS")
+    cur = db.cursor()
 
 # def connector():
 #     db = MySQLdb.connect(host="localhost",    # your host, usually localhost
@@ -15,13 +18,13 @@ import MySQLdb
 #                      db="mydb")        # name of the data base
 #     cur = db.cursor()
     
-
+'''
 db = MySQLdb.connect(host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
                  user="Admin",         # your username
                  passwd="UCD_2018",  # your password
                  db="OnYourBikeMySQL")        # name of the data base
 cur = db.cursor()
-
+'''
 
 
 def inserter_static(a, b, c, d, e, f, g, h):
@@ -55,11 +58,8 @@ def inserter_dynamic(a, b, c, d, e, f):
              status, bike_stands, available_bike_stands, available_bikes, last_update) \
            VALUES ('%d', '%s', '%d', '%d', '%d', '%s' )" % \
            (num, status, bikestands, avail, availbikes, last)   
-    try:
+    '''try:
        cur.execute(sql)
        db.commit()
-       return print("inserted 1 row of parsed json data into db")
-    except:
-       db.rollback()
-
-
+       return 0
+    '''
