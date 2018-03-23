@@ -46,7 +46,8 @@ class Bike_scraper:
 
 
     def parse_dynamic(self, dynamic_json):
-        start = 0
+        print("length of dynamic json is ", len(dynamic_json))
+        counter=0
         for i in dynamic_json:
             print(i)
             number = (i['number'])
@@ -59,6 +60,8 @@ class Bike_scraper:
             lu_dt = datetime.datetime.fromtimestamp(lu_sec)
             print(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
             inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
+            counter = counter+1
+            print("counter is ", counter)
         return 0
 
     

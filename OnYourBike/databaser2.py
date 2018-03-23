@@ -2,14 +2,14 @@
 import MySQLdb
 
 
-def connector():
-    db = MySQLdb.connect(
-        host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
-        user="Admin",         # your username
-        passwd="UCD_2018",  # your password
-        db="OnYourBikeMySQL")# name of the data base
-    print("Connected to AWS RDS")
-    cur = db.cursor()
+# def connector():
+#     db = MySQLdb.connect(
+#         host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
+#         user="Admin",         # your username
+#         passwd="UCD_2018",  # your password
+#         db="OnYourBikeMySQL")# name of the data base
+#     print("Connected to AWS RDS")
+#     cur = db.cursor()
 
 # def connector():
 #     db = MySQLdb.connect(host="localhost",    # your host, usually localhost
@@ -19,11 +19,11 @@ def connector():
 #     cur = db.cursor()
     
 
-# db = MySQLdb.connect(host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
-#                  user="Admin",         # your username
-#                  passwd="UCD_2018",  # your password
-#                  db="OnYourBikeMySQL")        # name of the data base
-# cur = db.cursor()
+db = MySQLdb.connect(host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
+                 user="Admin",         # your username
+                 passwd="UCD_2018",  # your password
+                 db="OnYourBikeMySQL")        # name of the data base
+cur = db.cursor()
 
 
 
@@ -61,7 +61,7 @@ def inserter_dynamic(a, b, c, d, e, f):
     try:
        cur.execute(sql)
        db.commit()
-       return 0
-    #except:
-     #  db.rollback()
+       #return 0
+    except:
+       db.rollback()
     
