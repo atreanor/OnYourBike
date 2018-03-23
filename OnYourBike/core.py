@@ -3,12 +3,15 @@
 """Console script for led_tester."""
 import sys
 sys.path.append('.')
+import databaser
+from databaser import *
+
 
 from time import sleep
 
 #Import files for classes
 import scraper
-import databaser
+
 #from databaser import Databaser
 
 #from tests import test_basic
@@ -23,15 +26,13 @@ def main(input):
     """Console script for led_tester."""
     print("Welcome to OnYourBike")
     #print("Input(path/URL):", input)
-
-
     contract = "Dublin"
     apikey = "e8823ad03eaa6b4b5b80b84203e56c1740394008"
     print("Scrape static")
     x = scraper.Bike_scraper(contract, apikey)
     # Static data - Call the method to scrape Dublin data and return json
     static_data = x.scrape_jcdecaux()
-    # call connector function
+    # call connector functiond
     databaser.connector()
     print("connected")
     

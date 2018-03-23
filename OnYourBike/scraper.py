@@ -5,11 +5,14 @@ from databaser import *
 import sys
 import core
 import datetime
+#import db
+ # This will always return the same object
 sys.path.append('.')
 
 
 class Bike_scraper:
     parsed_json = None
+    
 
     def __init__(self, contract, apikey):
         self.contract = contract
