@@ -2,5 +2,4 @@ nose
 sphinx
 requests
 click
-apscheduler 
-daemon
+mysqlclient
