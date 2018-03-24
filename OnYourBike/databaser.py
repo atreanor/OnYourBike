@@ -40,7 +40,7 @@ def inserter_static(a, b, c, d, e, f, g, h):
     lon=f
     bank=g
     bonus=h
-    sql = "INSERT INTO static_test (number,\
+    sql = "INSERT INTO JCD_static_data (number,\
              contract_name, name, address, lat, lng, banking, bonus) \
            VALUES ('%d', '%s', '%s', '%s', '%f', '%f', '%d', '%d' )"  % \
            (num, con, name, add, lat, lon, bank, bonus) 
@@ -59,7 +59,7 @@ def inserter_dynamic(a, b, c, d, e, f):
     avail=d
     availbikes=e
     last=f  
-    sql = "INSERT INTO dynamic_test4 (number, \
+    sql = "INSERT INTO JCD_dynamic_data (number, \
              status, bike_stands, available_bike_stands, available_bikes, last_update) \
            VALUES ('%d', '%s', '%d', '%d', '%d', '%s' )" % \
            (num, status, bikestands, avail, availbikes, last)
