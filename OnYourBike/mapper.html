@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 85%;
+        margin:auto;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>Dublin map with circles based on no. of bikes free </h3>
+      
+      
+    <div id="map"></div>
+      
+      
+        <script>           
+            var stations = {
+        one: {
+          center: {lat: 53.3496, lng: -6.2782},
+          bikesfree: 7
+        },
+        two: {
+          center: {lat: 53.3535, lng: -6.26531},
+          bikesfree: 12
+        },
+        three: {
+          three: {lat: 53.338, lng: -6.24153},
+          bikesfree: 20
+        },
+        four: {
+          center: {lat: 53.338, lng: -6.24153},
+          bikesfree: 50
+        },
+                
+            five: {
+          center: {lat: 53.3434, lng: -6.27012},
+          bikesfree: 20
+        },        
+           six: {
+          center: {lat: 53.3341, lng: -6.26544},
+          bikesfree: 30
+        },     
+          
+                seven: {
+          center: {lat: 53.33, lng: -6.265},
+          bikesfree: 25
+        }, 
+                
+              eight: {
+          center: {lat: 53.1, lng: -6.3},
+          bikesfree: 21
+        }      
+                
+            }
+                
+      function initMap() {
+          var centre = new google.maps.LatLng(53.34,-6.26);      
+          var mapOptions = {
+            zoom: 13,
+            center: centre,
+    mapTypeId: 'terrain'      };
+        var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+          
+          
+         // Construct the circle for each value in citymap.
+        // Note: We scale the area of the circle based on bikes free
+        for (var station in stations) {
+          // Add the circle for this city to the map.
+          var stationCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 1,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: .7,
+            map: map,
+            center: stations[station].center,
+            radius: Math.sqrt(stations[station].bikesfree) * 100
+              
+            
+        })  
+              stationCircle.addListener('click', function() {
+          map.setZoom(8);
+          map.setCenter(marker.getPosition());
+              
+              
+          });
+        }  
+          
+      } // end initMap
+          
+       
+            
+    </script>
+      
+      
+      
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCJ3N808qMKwu32fTVlpUaG8K4GSPo4qs&callback=initMap">
+    </script>
+  </body>
+</html>
