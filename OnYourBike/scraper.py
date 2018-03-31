@@ -9,10 +9,15 @@ import datetime
  # This will always return the same object
 sys.path.append('.')
 
+# This function initializes the Bike_scraper class:
+
+def JCDecaux_scrape_init ():
+    contract = "Dublin"
+    apikey = "e8823ad03eaa6b4b5b80b84203e56c1740394008" # API key for JC Decaux
+    return Bike_scraper(contract, apikey)
 
 class Bike_scraper:
     parsed_json = None
-    
 
     def __init__(self, contract, apikey):
         self.contract = contract
@@ -63,5 +68,3 @@ class Bike_scraper:
             databaser.inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
         print("Dynamic data parsed and SQL insert statements executed")
         return 0
-
-    

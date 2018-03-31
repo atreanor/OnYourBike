@@ -4,12 +4,10 @@
 import sys
 sys.path.append('.')
 import datetime
-import time
+from time import sleep
 from OnYourBike import scraper
 from OnYourBike import databaser
-
-
-from time import sleep
+from OnYourBike import owm
 
 #from tests import test_basic
 
@@ -21,17 +19,29 @@ click.disable_unicode_literals_warning = True
 
 def main(input):
     """Console script for led_tester."""
+
     print("Welcome to OnYourBike")
-    #print("Input(path/URL):", input)
-    contract = "Dublin"
-    apikey = "e8823ad03eaa6b4b5b80b84203e56c1740394008"
-    x = scraper.Bike_scraper(contract, apikey)
-    # Static data - Call the method to scrape Dublin data and return json
-    print("Request static data")
-    static_data = x.scrape_jcdecaux()
-    # call connector function
+
+    # Initalize the Bike_scraper class:
+    x = scraper.JCDecaux_scrape_init()
+    # Initalize the open weather map scraper class:
+    y = owm.owm_connect()
+
+    # Call the MYSQL database connection function:
     databaser.connector()
-    
+    # Request current weather data:
+    owm_current = y.owm_request_current()
+
+    #Parse current weather response (JSON):
+    y.owm_parse_current(owm_current)
+
+    # Call function to execute insert function every half hour:
+    y.insert_scheduler()
+
+    # Static data - Call the method to scrape Dublin data and return json
+    print("JCDecaux - Request static data")
+    #static_data = x.scrape_jcdecaux()
+
     # Call parse_json method to parse the json response
     for i in static_data:
         number, contract_name, name, address, lat, lng, banking, bonus = x.parse_json(i)
@@ -63,7 +73,7 @@ def main(input):
             #    print(message)
             #    print(ex)
             #    exit()
-        return 0
+    return 0
 
     scheduler()
 
