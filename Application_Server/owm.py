@@ -46,7 +46,7 @@ class OpenWeatherMap:
         self.sunset = None
         self.sys_type = None
 
-    # Python Class Encapsulation - Properties (getter), setters and delete
+    # Python Class Encapsulation - Properties (getter), setters
     @property
     def owm_key(self):
         return self._owm_key
@@ -75,29 +75,30 @@ class OpenWeatherMap:
         api_url = "http://api.openweathermap.org/data/2.5/weather?q="+self._owm_city+","\
                   +self._owm_country+"&appid="+self._owm_key
         response = requests.get(api_url)
+        global owm_json
         owm_json = json.loads(response.content)
         print("Response received from Open Weather Map:", response.status_code)
-        return owm_json
+        return None
 
-    def owm_parse_current(self, owm_current):
-        self.clouds = owm_current['clouds']['all']
-        self.cod = owm_current['cod']
-        self.coord_lat = owm_current['coord']['lat']
-        self.coord_long = owm_current['coord']['lon']
-        self.owm_datetime = owm_current['dt']
-        self.id = owm_current['id']
-        self.humidity = owm_current['main']['humidity']
-        self.pressure = owm_current['main']['pressure']
-        self.temp = owm_current['main']['temp']
-        self.temp_min = owm_current['main']['temp_min']
-        self.temp_max = owm_current['main']['temp_max']
-        self.city = owm_current['name']
-        self.country = owm_current['sys']['country']
-        self.sys_id = owm_current['sys']['id']
-        self.sys_message = owm_current['sys']['message']
-        self.sunrise = owm_current['sys']['sunrise']
-        self.sunset = owm_current['sys']['sunset']
-        self.sys_type = owm_current['sys']['type']
+    def owm_parse_current(self):
+        self.clouds = owm_json['clouds']['all']
+        self.cod = owm_json['cod']
+        self.coord_lat = owm_json['coord']['lat']
+        self.coord_long = owm_json['coord']['lon']
+        self.owm_datetime = owm_json['dt']
+        self.id = owm_json['id']
+        self.humidity = owm_json['main']['humidity']
+        self.pressure = owm_json['main']['pressure']
+        self.temp = owm_json['main']['temp']
+        self.temp_min = owm_json['main']['temp_min']
+        self.temp_max = owm_json['main']['temp_max']
+        self.city = owm_json['name']
+        self.country = owm_json['sys']['country']
+        self.sys_id = owm_json['sys']['id']
+        self.sys_message = owm_json['sys']['message']
+        self.sunrise = owm_json['sys']['sunrise']
+        self.sunset = owm_json['sys']['sunset']
+        self.sys_type = owm_json['sys']['type']
 
         global date_dt
         global sunrise_dt

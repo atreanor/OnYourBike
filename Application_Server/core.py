@@ -28,19 +28,19 @@ def main(input):
     y = owm.owm_connect()
 
     # Call the MYSQL database connection function:
-    #databaser.connector()
+    databaser.connector()
     # Request current weather data:
-    owm_current = y.owm_request_current()
+    y.owm_request_current()
 
     #Parse current weather response (JSON):
-    y.owm_parse_current(owm_current)
+    y.owm_parse_current()
 
     # Call function to execute insert function every half hour:
     y.insert_scheduler()
 
     # Static data - Call the method to scrape Dublin data and return json
     print("JCDecaux - Request static data")
-    #static_data = x.scrape_jcdecaux()
+    static_data = x.scrape_jcdecaux()
 
     # Call parse_json method to parse the json response
     for i in static_data:
