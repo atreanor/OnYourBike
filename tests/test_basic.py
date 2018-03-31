@@ -3,7 +3,7 @@ import sys
 
 sys.path.append('.')
 
-from Application_Server.scraper import Bike_scraper
+from Application_Server.JCDecaux import Bike_scraper
 
 
 class TestBasicFunction(unittest.TestCase):

@@ -5,7 +5,7 @@ import sys
 sys.path.append('.')
 import datetime
 from time import sleep
-from Application_Server import scraper
+from Application_Server import JCDecaux
 from Application_Server import databaser
 from Application_Server import owm
 
@@ -23,12 +23,12 @@ def main(input):
     print("Welcome to OnYourBike's Application Server!!! :)")
 
     # Initalize the Bike_scraper class:
-    x = scraper.JCDecaux_scrape_init()
+    x = JCDecaux.JCDecaux_scrape_init()
     # Initalize the open weather map scraper class:
     y = owm.owm_connect()
 
     # Call the MYSQL database connection function:
-    databaser.connector()
+    #databaser.connector()
     # Request current weather data:
     owm_current = y.owm_request_current()
 
@@ -58,8 +58,7 @@ def main(input):
                 sleep(300)
 
             except NameError as e:
-                print("Name error")
-                print(e)
+                print(__name__, "-", e)
                 sleep(10)
                 exit()
 

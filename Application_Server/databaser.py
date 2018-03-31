@@ -75,7 +75,6 @@ def insert_owm_current(clouds, cod, coord_lat, coord_long, date_dt, id, humidity
           " sunrise_dt, sunset_dt) \
         VALUES ('%d', '%d', '%f', '%f', '%s', '%d', '%d', '%d', '%d','%d','%d', '%s', '%s', '%d', '%s', '%s', '%s')" % \
         (clouds, cod, coord_lat, coord_long, date_dt, id, humidity, pressure, temp, temp_min, temp_max, city, country, sys_id, sys_message, sunrise_dt, sunset_dt)
-    print(type(date_dt), type(sunrise_dt))
 
     cur.execute(sql)
     db.commit()

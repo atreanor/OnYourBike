@@ -120,8 +120,7 @@ class OpenWeatherMap:
                 sleep(3600)
 
             except NameError as e:
-                print("Name error")
-                print(e)
+                print(__name__, "-", e)
                 sleep(10)
                 exit()
 
