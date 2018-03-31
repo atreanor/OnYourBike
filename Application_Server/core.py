@@ -5,9 +5,9 @@ import sys
 sys.path.append('.')
 import datetime
 from time import sleep
-from OnYourBike import scraper
-from OnYourBike import databaser
-from OnYourBike import owm
+from Application_Server import scraper
+from Application_Server import databaser
+from Application_Server import owm
 
 #from tests import test_basic
 
@@ -20,7 +20,7 @@ click.disable_unicode_literals_warning = True
 def main(input):
     """Console script for led_tester."""
 
-    print("Welcome to OnYourBike")
+    print("Welcome to Application_Server")
 
     # Initalize the Bike_scraper class:
     x = scraper.JCDecaux_scrape_init()

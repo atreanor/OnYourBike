@@ -1,6 +1,6 @@
 from jinja2 import Environment, PackageLoader, select_autoescape
 env = Environment(
-    loader=PackageLoader('OnYourBike', 'templates'),
+    loader=PackageLoader('Application_Server', 'templates'),
     autoescape=select_autoescape(['html', 'xml'])
 )
 

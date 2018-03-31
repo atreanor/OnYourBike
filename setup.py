@@ -12,18 +12,18 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='OnYourBike',
+    name='Application_Server',
     version='0.1.0',
-    description='A Python package for OnYourBike',
+    description='A Python package for Application_Server',
     long_description=readme,
     author='Sheena Davitt, Alan Treanor, Thomas Anderson',
     author_email='thomas.anderson@ucdconnect.ie',
-    url='https://github.com/atreanor/OnYourBike',
+    url='https://github.com/atreanor/Application_Server',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
     entry_points = {
     'console_scripts': [
-        'oyb=OnYourBike.core:main',
+        'oyb_as=Application_Server.core:main',
     ],
     },
 )
