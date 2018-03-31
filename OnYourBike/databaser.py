@@ -17,7 +17,8 @@ def connector():
             cur = db.cursor()
 
         except (MySQLdb.Error, MySQLdb.Warning) as e:
-            print("Connection to MYSQL database has failed:")
+            print("Connection to the AWS RDS MYSQL database has failed. Will retry in 30 seconds.")
+            print("Error details are below:")
             print(e)
             sleep(30)
         except Exception:
