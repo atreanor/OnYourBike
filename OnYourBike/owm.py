@@ -15,7 +15,6 @@ def owm_connect():
     owm_key = "350d70da9c80ab41ceec02a84094004d" # API key for Open Weather Map
     owm_city = "Dublin"
     owm_country = "ie"
-    print("key:", owm_key, owm_city, owm_country)
     return OpenWeatherMap(owm_key, owm_city, owm_country)
 
 
