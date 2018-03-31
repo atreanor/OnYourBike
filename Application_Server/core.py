@@ -20,7 +20,7 @@ click.disable_unicode_literals_warning = True
 def main(input):
     """Console script for led_tester."""
 
-    print("Welcome to Application_Server")
+    print("Welcome to OnYourBike's Application Server!!! :)")
 
     # Initalize the Bike_scraper class:
     x = scraper.JCDecaux_scrape_init()
