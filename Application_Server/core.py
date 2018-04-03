@@ -8,6 +8,7 @@ from time import sleep
 from Application_Server import JCDecaux
 from Application_Server import databaser
 from Application_Server import owm
+import thread
 
 #from tests import test_basic
 
@@ -36,7 +37,7 @@ def main(input):
     y.owm_parse_current()
 
     # Call function to execute insert function every half hour:
-    y.insert_scheduler()
+    y.insert_scheduler
 
     # Static data - Call the method to scrape Dublin data and return json
     print("JCDecaux - Request static data")
@@ -72,7 +73,7 @@ def main(input):
             #    print(message)
             #    print(ex)
             #    exit()
-    return 0
+        return 0
 
     scheduler()
 

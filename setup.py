@@ -13,12 +13,12 @@ with open('LICENSE') as f:
 
 setup(
     name='Application_Server',
-    version='0.1.0',
+    version='0.2.0',
     description='A Python package for Application_Server',
     long_description=readme,
     author='Sheena Davitt, Alan Treanor, Thomas Anderson',
     author_email='thomas.anderson@ucdconnect.ie',
-    url='https://github.com/atreanor/Application_Server',
+    url='https://github.com/atreanor/OnYourBike',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
     entry_points = {

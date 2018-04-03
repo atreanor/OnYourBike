@@ -8,13 +8,14 @@ def connector():
     while True:
         try:
             db = MySQLdb.connect(
-                host="onyourbikemysql.ccljfz7hpfu8.us-west-2.rds.amazonaws.com",    # your host, usually localhost
+                host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com",    # your host, usually localhost
                 user="Admin",         # your username
                 passwd="UCD_2018",  # your password
-                db="OnYourBikeMySQL")# name of the data base
-            print("Connected to AWS RDS")
+                db="onyourbikemysql")# name of the data base
+            print("Connected to Database Server (AWS RDS)")
             global cur
             cur = db.cursor()
+            break
 
         except (MySQLdb.Error, MySQLdb.Warning) as e:
             print("Connection to the AWS RDS MYSQL database has failed. Will retry in 30 seconds.")
@@ -69,9 +70,9 @@ def inserter_dynamic(a, b, c, d, e, f):
 
 
 def insert_owm_current(clouds, cod, coord_lat, coord_long, date_dt, id, humidity, pressure, temp, temp_min, temp_max, city, country, sys_id, sys_message, sunrise_dt, sunset_dt):
-    sql = "INSERT INTO OWM_current (self.clouds, self.cod, self.coord_lat, self.coord_long," \
-          "date_dt, self.id, self.humidity, self.pressure, self.temp, self.temp_min," \
-          "self.temp_max, self.city, self.country, self.sys_id, self.sys_message," \
+    sql = "INSERT INTO OWM_current (clouds, cod, coord_lat, coord_long," \
+          "date_dt, id, humidity, pressure, temp, temp_min," \
+          "temp_max, city, country, sys_id, sys_message," \
           " sunrise_dt, sunset_dt) \
         VALUES ('%d', '%d', '%f', '%f', '%s', '%d', '%d', '%d', '%d','%d','%d', '%s', '%s', '%d', '%s', '%s', '%s')" % \
         (clouds, cod, coord_lat, coord_long, date_dt, id, humidity, pressure, temp, temp_min, temp_max, city, country, sys_id, sys_message, sunrise_dt, sunset_dt)

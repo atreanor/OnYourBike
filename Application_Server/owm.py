@@ -5,6 +5,7 @@ import sys
 import datetime
 from time import sleep
 from Application_Server import databaser
+import pprint
 
 # This will always return the same object
 sys.path.append('.')
@@ -80,6 +81,7 @@ class OpenWeatherMap:
         print("Response received from Open Weather Map:", response.status_code)
         return None
 
+
     def owm_parse_current(self):
         self.clouds = owm_json['clouds']['all']
         self.cod = owm_json['cod']
@@ -113,12 +115,12 @@ class OpenWeatherMap:
     def insert_scheduler(self):
         while True:
             try:
-                print("Open Weather Map - Insert Query executed:")
+                print("Open Weather Map - Scheduler running every half an hour:")
                 databaser.insert_owm_current(self.clouds, self.cod, self.coord_lat, self.coord_long, date_dt,
                                              self.id, self.humidity,self.pressure, self.temp, self.temp_min,
                                              self.temp_max, self.city, self.country, self.sys_id, self.sys_message,
                                              sunrise_dt, sunset_dt)
-                sleep(3600)
+                sleep(1800)
 
             except NameError as e:
                 print(__name__, "-", e)
