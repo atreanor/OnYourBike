@@ -8,7 +8,6 @@ from time import sleep
 from Application_Server import JCDecaux
 from Application_Server import databaser
 from Application_Server import owm
-import thread
 
 #from tests import test_basic
 
