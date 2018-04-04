@@ -3,6 +3,7 @@ import requests
 import json
 from Application_Server import databaser
 import sys
+from time import sleep
 
 import datetime
 
@@ -17,54 +18,93 @@ def JCDecaux_scrape_init ():
     return Bike_scraper(contract, apikey)
 
 class Bike_scraper:
-    parsed_json = None
+    json_response = None
 
     def __init__(self, contract, apikey):
         self.contract = contract
         self.apikey = apikey
-        return None
+        # class variables for static weather:
+        self.number = None
+        self.s_contract_name = None
+        self.s_name = None
+        self.s_address = None
+        self.s_lat = None
+        self.s_lng = None
+        self.s_banking = None
+        self.s_bonus = None
+        # variables for dynamic weather:
+        self.d_status = None
+        self.d_bike_stands = None
+        self.d_bike_stands = None
+        self.d_available_bike_stands = None
+        self.d_available_bikes = None
+        self.d_last_update = None
 
     def scrape_jcdecaux(self):
         contract = self.contract
         api_url = "https://api.jcdecaux.com/vls/v1/stations?contract="+self.contract+"&apiKey="+self.apikey+""
         response = requests.get(api_url)
         json_response = json.loads(response.content)
-        print("Response received from JC Decaux:", response.status_code)
+        #print("Response received from JC Decaux:", response.status_code)
         return json_response
 
-    def parse_json(self, i):
-        #print('Entry : {}'.format(i))
-        number = (i['number'])
-        contract_name = (i['contract_name'])
-        name = (i['name'])
-        address = (i['address'])
-        lat = i['position']['lat']
-        lng = i['position']['lng']
-        banking = (i['banking'])
-        bonus = (i['bonus'])
-        #print(number, contract_name, name, address, lat, lng, banking, bonus)
-        #print("Static data parsed")
-        return number, contract_name, name, address, lat, lng, banking, bonus
+    def parse_static(self, json_response):
+        print("Length of dynamic json is ", len(json_response))
+        for i in json_response:
+            # Static variables
+            self.number = (i['number'])
+            self.s_contract_name = (i['contract_name'])
+            self.s_name = (i['name'])
+            self.s_address = (i['address'])
+            self.s_lat = i['position']['lat']
+            self.s_lng = i['position']['lng']
+            self.s_banking = (i['banking'])
+            self.s_bonus = (i['bonus'])
+            databaser.inserter_static(self.number, self.s_contract_name, self.s_name, self.s_address, self.s_lat, self.s_lng, self.s_banking, self.s_bonus)
+        print("Static data parsed and SQL insert statements executed")
 
-# start=0
-#  
-# for start to lenght of dynamic json
-#  
-# at end - increment start by lenght of dynamic json
+        return 0
 
-
-    def parse_dynamic(self, dynamic_json):
-        print("Length of dynamic json is ", len(dynamic_json))
-        for i in dynamic_json:
-            number = (i['number'])
-            status = (i['status'])
-            bike_stands = (i['bike_stands'])
-            available_bike_stands = (i['available_bike_stands'])
-            available_bikes = (i['available_bikes'])
-            last_update = (i['last_update'])
-            lu_sec = last_update/1000
+    def parse_dynamic(self, json_response):
+        for i in json_response:
+            # Static variables
+            self.number = (i['number'])
+            self.d_status = (i['status'])
+            self.d_bike_stands = (i['bike_stands'])
+            self.d_available_bike_stands = (i['available_bike_stands'])
+            self.d_available_bikes = (i['available_bikes'])
+            self.d_last_update = (i['last_update'])
+            lu_sec = self.d_last_update / 1000
             lu_dt = datetime.datetime.fromtimestamp(lu_sec)
-            #print(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
-            databaser.inserter_dynamic(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
-        print("Dynamic data parsed and SQL insert statements executed")
+            # print(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
+            databaser.inserter_dynamic(self.number, self.d_status, self.d_bike_stands, self.d_available_bike_stands, self.d_available_bikes, lu_dt)
+        print("Dynamic data - Parsed and SQL executed")
+
+        return 0
+
+    def jcd_scheduler(self):
+        print("JCDecaux Scheduler")
+
+        while True:
+            try:
+                print("JCD Dynamic scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+                json_response = self.scrape_jcdecaux()
+                self.parse_dynamic(json_response)
+                sleep(3)
+
+            except NameError as e:
+                print(__name__, "-", e)
+                sleep(10)
+                exit()
+
+            except KeyboardInterrupt as e:
+                print("\n You have stopped the scheduler \n Goodbye!")
+                exit()
+
+            #except Exception as ex:
+            #    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            #    message = template.format(type(ex).__name__, ex.args)
+            #    print(message)
+            #    print(ex)
+            #    exit()
         return 0

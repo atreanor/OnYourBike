@@ -46,6 +46,9 @@ class OpenWeatherMap:
         self.sunrise = None
         self.sunset = None
         self.sys_type = None
+        self.date_dt = None
+        self.sunrise_dt = None
+        self.sunset_dt = None
 
     # Python Class Encapsulation - Properties (getter), setters
     @property
@@ -101,26 +104,26 @@ class OpenWeatherMap:
         self.sunrise = owm_json['sys']['sunrise']
         self.sunset = owm_json['sys']['sunset']
         self.sys_type = owm_json['sys']['type']
+        self.date_dt = datetime.datetime.fromtimestamp(self.owm_datetime)
+        self.sunrise_dt = datetime.datetime.fromtimestamp(self.sunrise)
+        self.sunset_dt = datetime.datetime.fromtimestamp(self.sunset)
+        print("Weather data received from OWM as of:", self.date_dt.strftime("%Y-%m-%d %H:%M"))
+        return 0
 
-        global date_dt
-        global sunrise_dt
-        global sunset_dt
-        date_dt = datetime.datetime.fromtimestamp(self.owm_datetime)
-        sunrise_dt = datetime.datetime.fromtimestamp(self.sunrise)
-        sunset_dt = datetime.datetime.fromtimestamp(self.sunset)
-
-        print("Weather data received from OWM as of:", date_dt.strftime("%Y-%m-%d %H:%M"))
-        return date_dt, sunrise_dt, sunset_dt
-
-    def insert_scheduler(self):
+    def owm_scheduler(self):
         while True:
             try:
+                print("hello")
+                self.owm_request_current()
+                print("Will parse")
+                self.owm_parse_current()
+                print("Parsed!")
                 print("Open Weather Map - Scheduler running every half an hour:")
-                databaser.insert_owm_current(self.clouds, self.cod, self.coord_lat, self.coord_long, date_dt,
+                databaser.insert_owm_current(self.clouds, self.cod, self.coord_lat, self.coord_long, self.date_dt,
                                              self.id, self.humidity,self.pressure, self.temp, self.temp_min,
                                              self.temp_max, self.city, self.country, self.sys_id, self.sys_message,
-                                             sunrise_dt, sunset_dt)
-                sleep(1800)
+                                             self.sunrise_dt, self.sunset_dt)
+                sleep(3)
 
             except NameError as e:
                 print(__name__, "-", e)

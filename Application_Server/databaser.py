@@ -11,7 +11,8 @@ def connector():
                 host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com",    # your host, usually localhost
                 user="Admin",         # your username
                 passwd="UCD_2018",  # your password
-                db="onyourbikemysql")# name of the data base
+                )
+            #db = "onyourbikemysql"
             print("Connected to Database Server (AWS RDS)")
             global cur
             cur = db.cursor()
@@ -38,10 +39,10 @@ def inserter_static(a, b, c, d, e, f, g, h):
     lon=f
     bank=g
     bonus=h
-    sql = "INSERT INTO JCD_static_data (number,\
+    sql = "INSERT INTO onyourbikemysql.JCD_static_data (number,\
              contract_name, name, address, lat, lng, banking, bonus) \
            VALUES ('%d', '%s', '%s', '%s', '%f', '%f', '%d', '%d' )"  % \
-           (num, con, name, add, lat, lon, bank, bonus) 
+           (num, con, name, add, lat, lon, bank, bonus)
     try:
        cur.execute(sql)
        db.commit()
@@ -57,7 +58,7 @@ def inserter_dynamic(a, b, c, d, e, f):
     avail=d
     availbikes=e
     last=f  
-    sql = "INSERT INTO JCD_dynamic_data (number, \
+    sql = "INSERT INTO onyourbikemysql.JCD_dynamic_data (number, \
              status, bike_stands, available_bike_stands, available_bikes, last_update) \
            VALUES ('%d', '%s', '%d', '%d', '%d', '%s' )" % \
            (num, status, bikestands, avail, availbikes, last)
@@ -70,7 +71,7 @@ def inserter_dynamic(a, b, c, d, e, f):
 
 
 def insert_owm_current(clouds, cod, coord_lat, coord_long, date_dt, id, humidity, pressure, temp, temp_min, temp_max, city, country, sys_id, sys_message, sunrise_dt, sunset_dt):
-    sql = "INSERT INTO OWM_current (clouds, cod, coord_lat, coord_long," \
+    sql = "INSERT INTO OpenWeatherMap.OWM_current (clouds, cod, coord_lat, coord_long," \
           "date_dt, id, humidity, pressure, temp, temp_min," \
           "temp_max, city, country, sys_id, sys_message," \
           " sunrise_dt, sunset_dt) \

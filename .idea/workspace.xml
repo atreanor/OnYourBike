@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/Application_Server/JCDecaux.py" description="        for i in parsed_json:&#10;            print(&quot;d..." line="57" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="e38aec31-4528-4ad2-9af3-34c0664bde0e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application_Server/JCDecaux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/JCDecaux.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application_Server/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/core.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application_Server/databaser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/databaser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application_Server/owm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/owm.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +20,20 @@
       <file leaf-file-name="core.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application_Server/core.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-102">
-              <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+            <state relative-caret-position="189">
+              <caret line="38" selection-start-line="38" selection-end-line="38" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JCDecaux.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application_Server/JCDecaux.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1462">
+              <caret line="49" selection-start-line="49" selection-end-line="49" />
+              <folding>
+                <element signature="e#24#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -28,8 +41,8 @@
       <file leaf-file-name="owm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application_Server/owm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
-              <caret line="122" column="26" selection-start-line="122" selection-start-column="26" selection-end-line="122" selection-end-column="26" />
+            <state relative-caret-position="3604">
+              <caret line="112" column="11" selection-start-line="112" selection-start-column="11" selection-end-line="112" selection-end-column="11" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -40,8 +53,8 @@
       <file leaf-file-name="databaser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application_Server/databaser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2618">
-              <caret line="78" selection-start-line="78" selection-end-line="78" />
+            <state relative-caret-position="102">
+              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -68,6 +81,7 @@
       <find>OnYourBike</find>
       <find>self.cod = owm_current['cod']         self.coord_lat = owm_current['coord']['lat']         self.coord_long = owm_current['coord']['lon']         self.owm_datetime = owm_current['dt']         self.id = owm_current['id']         self.humidity = owm_current['main']['humidity']         self.pressure = owm_current['main']['pressure']         self.temp = owm_current['main']['temp']         self.temp_min = owm_current['main']['temp_min']         self.temp_max = owm_current['main']['temp_max']         self.city = owm_current['name']         self.country = owm_current['sys']['country']         self.sys_id = owm_current['sys']['id']         self.sys_message = owm_current['sys']['message']         self.sunrise = owm_current['sys']['sunrise']         self.sunset = owm_current['sys']['sunset']         self.sys_type = owm_current['sys']['type']</find>
       <find>type</find>
+      <find>response re</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -95,18 +109,19 @@
         <option value="$PROJECT_DIR$/OnYourBike/core.py" />
         <option value="$PROJECT_DIR$/OnYourBike/databaser.py" />
         <option value="$PROJECT_DIR$/OnYourBike/owm.py" />
-        <option value="$PROJECT_DIR$/Application_Server/databaser.py" />
-        <option value="$PROJECT_DIR$/Application_Server/owm.py" />
         <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/Application_Server/databaser.py" />
+        <option value="$PROJECT_DIR$/Application_Server/JCDecaux.py" />
+        <option value="$PROJECT_DIR$/Application_Server/owm.py" />
         <option value="$PROJECT_DIR$/Application_Server/core.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="98" />
-    <option name="y" value="35" />
-    <option name="width" value="1211" />
-    <option name="height" value="1220" />
+    <option name="y" value="39" />
+    <option name="width" value="1201" />
+    <option name="height" value="1266" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -116,6 +131,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -132,7 +148,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -281,13 +296,13 @@
     <frame x="98" y="35" width="2462" height="1565" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4988363" visible="true" weight="0.31555003" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49536425" visible="true" weight="0.31555003" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50041354" side_tool="true" weight="0.41427463" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Python Console" order="8" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49958643" weight="0.41427463" />
-      <window_info id="Structure" order="1" sideWeight="0.5011637" side_tool="true" visible="true" weight="0.31555003" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49958643" visible="true" weight="0.41427463" />
+      <window_info id="Structure" order="1" sideWeight="0.50463575" side_tool="true" visible="true" weight="0.31555003" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39984533" />
@@ -304,6 +319,23 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Application_Server/JCDecaux.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2346">
+          <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
+          <folding>
+            <element signature="e#24#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application_Server/databaser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="749">
+          <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Application_Server/core.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1972">
@@ -573,10 +605,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Application_Server/JCDecaux.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="1462">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>
@@ -585,32 +624,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application_Server/databaser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2618">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        <state relative-caret-position="102">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application_Server/owm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="122" column="26" selection-start-line="122" selection-start-column="26" selection-end-line="122" selection-end-column="26" />
+        <state relative-caret-position="3604">
+          <caret line="112" column="11" selection-start-line="112" selection-start-column="11" selection-end-line="112" selection-end-column="11" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application_Server/core.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-102">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+        <state relative-caret-position="189">
+          <caret line="38" selection-start-line="38" selection-end-line="38" selection-end-column="16" />
         </state>
       </provider>
     </entry>

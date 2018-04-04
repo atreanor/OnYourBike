@@ -3,12 +3,11 @@
 """Console script for led_tester."""
 import sys
 sys.path.append('.')
-import datetime
-from time import sleep
+
 from Application_Server import JCDecaux
 from Application_Server import databaser
 from Application_Server import owm
-
+from multiprocessing import Process
 #from tests import test_basic
 
 import click
@@ -29,55 +28,23 @@ def main(input):
 
     # Call the MYSQL database connection function:
     databaser.connector()
-    # Request current weather data:
-    y.owm_request_current()
 
-    #Parse current weather response (JSON):
-    y.owm_parse_current()
+    # JCDecaux Static data - Request, parse and execute SQL
+    json_response = x.scrape_jcdecaux()
+    x.parse_static(json_response)
 
-    # Call function to execute insert function every half hour:
-    y.insert_scheduler
+    def func1():
+        x.jcd_scheduler()
 
-    # Static data - Call the method to scrape Dublin data and return json
-    print("JCDecaux - Request static data")
-    static_data = x.scrape_jcdecaux()
-
-    # Call parse_json method to parse the json response
-    for i in static_data:
-        number, contract_name, name, address, lat, lng, banking, bonus = x.parse_json(i)
-        # Call method to add static information to database
-        databaser.inserter_static(number, contract_name, name, address, lat, lng, banking, bonus)
-
-    # The scheduler schedules scraping of dynamic data from JCDecaux
-    def scheduler():
-        while True:
-            try:
-                print("Request Dynamic data - Executed by scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
-                dynamic_json = x.scrape_jcdecaux()
-                x.parse_dynamic(dynamic_json)
-                sleep(300)
-
-            except NameError as e:
-                print(__name__, "-", e)
-                sleep(10)
-                exit()
-
-            except KeyboardInterrupt as e:
-                print("\n You have stopped the scheduler \n Goodbye!")
-                exit()
-
-            #except Exception as ex:
-            #    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-            #    message = template.format(type(ex).__name__, ex.args)
-            #    print(message)
-            #    print(ex)
-            #    exit()
-        return 0
-
-    scheduler()
+    def func2():
+        y.owm_scheduler()
 
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
+    p1 = Process(target=main.func1)
+    p1.start()
+    p2 = Process(target=main.func2)
+    p2.start()
