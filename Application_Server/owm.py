@@ -123,7 +123,8 @@ class OpenWeatherMap:
                                              self.id, self.humidity,self.pressure, self.temp, self.temp_min,
                                              self.temp_max, self.city, self.country, self.sys_id, self.sys_message,
                                              self.sunrise_dt, self.sunset_dt)
-                sleep(3)
+                # Execute every 0.5 hours  (1800 seconds)
+                sleep(1800)
 
             except NameError as e:
                 print(__name__, "-", e)

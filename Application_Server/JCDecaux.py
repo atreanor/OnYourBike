@@ -49,6 +49,7 @@ class Bike_scraper:
         return json_response
 
     def parse_static(self, json_response):
+
         print("Length of dynamic json is ", len(json_response))
         for i in json_response:
             # Static variables
@@ -82,15 +83,43 @@ class Bike_scraper:
 
         return 0
 
-    def jcd_scheduler(self):
-        print("JCDecaux Scheduler")
+    def jcd_d_scheduler(self):
+        print("JCDecaux Dynamic Scheduler:")
 
         while True:
             try:
                 print("JCD Dynamic scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
                 json_response = self.scrape_jcdecaux()
                 self.parse_dynamic(json_response)
-                sleep(3)
+                # Execute every 5 minutes  (300 seconds)
+                sleep(300)
+
+            except NameError as e:
+                print(__name__, "-", e)
+                sleep(10)
+                exit()
+
+            except KeyboardInterrupt as e:
+                print("\n You have stopped the scheduler \n Goodbye!")
+                exit()
+
+            #except Exception as ex:
+            #    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            #    message = template.format(type(ex).__name__, ex.args)
+            #    print(message)
+            #    print(ex)
+            #    exit()
+        return 0
+
+    def jcd_s_scheduler(self):
+
+        while True:
+            try:
+                print("JCD Static scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+                json_response = self.scrape_jcdecaux()
+                self.parse_static(json_response)
+                # Execute every 12 hours  (43200 seconds)
+                sleep(43200)
 
             except NameError as e:
                 print(__name__, "-", e)
