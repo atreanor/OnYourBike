@@ -23,7 +23,8 @@ setup(
     packages=find_packages(exclude=('tests', 'docs')),
     entry_points = {
     'console_scripts': [
-        'oyb_as=Application_Server.core:main',
+        'bikes=Application_Server.core:bikes',
+        "weather=Application_Server.core:weather",
     ],
     },
 )
