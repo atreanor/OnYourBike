@@ -1,13 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }} - microblog</title>
-</head>
-<body>
-    <h1>Hello, {{ user }}!</h1>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 400px;
+        width: 85%;
+        margin:auto;
+       }
+    </style>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      
+      
+  </head>
+  <body>
+      
+     <h1> {{ title }}</h1>
+      
+      
+    <h2>Dublin maps with multiple markers</h2>
+      
+      
+      
+      
+    <div id="map"></div>
+      
+      
+        <script>              
+                
+      function initMap() {
+          var centre = new google.maps.LatLng(53.34,-6.26);      
+          var mapOptions = {
+            zoom: 14,
+            center: centre};
+        var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+        createMarkers(map);
+      } // end initMap
+                  
+            
+ function createMarkers(map){
+     
+     $.getJSON('http://127.0.0.1:5000/getjson', function(data)
+               {
+     console.log("success", data);
+         var names = data.c.name;
+         var available_bikes = data.c.available_bikes;
+         var free_stands = data.c.free_stands;
+         var lat = data.c.lat;
+         var lng = data.c.lng;
+//         var thislat = lat[i]
+//        var thislng = lng[i]
+//        var coords = {thislat,thislng}
+         
+         //(i in data)
+         // (var i = 0; i < coords.length; i++)
+            for (var i = 0; i < names.length; i++)
+            {                     
+                     
+               var marker = new google.maps.Marker({
+            position: {
+                lat:lat[i],
+                lng:lng[i]   
+            }, // end position brackets
+            map: map
+          }); 
+                
+        attachContent(marker, names[i], available_bikes[i], free_stands[i]);
 
-<!-- {{ owm }} -->
+            } // end for loop
+     
+         
+     })// end function data
+         .done(function() {
+console.log( "second success" );
+})
+  .fail(function() {
+console.log( "error" );
+})   
+     
+  .always(function() {
+console.log( "complete" );
+});   
+     
+ }// end function createMarkers
+            
+      
+            
+            // Attaches an info window to a marker with the provided station info. When the
+      // marker is clicked, the info window will open with the station info.
+      function attachContent(marker, names, avbikes, freestands) {
+        var infowindow = new google.maps.InfoWindow({
+          content: "<b>Station: </b>" + names + "<br>"+ "<b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands
+        });
 
-</body>
+          
+        marker.addListener('click', function() {
+            infowindow.close(marker.get('map'), marker);
+          infowindow.open(marker.get('map'), marker);
+        });
+      }   // end function attachContent         
+                
+       
+            
+          
+            
+            
+            
+    </script>
+      
+      
+      
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCJ3N808qMKwu32fTVlpUaG8K4GSPo4qs&callback=initMap">
+    </script>
+  </body>
 </html>

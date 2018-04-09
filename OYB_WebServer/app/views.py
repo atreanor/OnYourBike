@@ -1,31 +1,25 @@
 from flask import render_template
+from flask import jsonify
 from app import app
 from app import model
+import json
+import simplejson
+
 
 @app.route('/')
 def index():
-    returnDict = {}
-    returnDict['user'] = 'Tom'
-    returnDict['title'] = 'Home'
-    #contract = "Dublin"
-    #apikey = "e8823ad03eaa6b4b5b80b84203e56c1740394008" # API key for JC Decaux
-    #returnDict['owm'] = owm.owm_scrape()
-    return render_template("index.html", **returnDict)
-    
+    a = {}
+    a['title'] = 'Welcome to OnYourBike DublinBikes app'
+    jsonify(a=a)
+    return render_template("index.html", **a)
 
-@app.route('/map')
-def map():
-    returnDict = {}
-    returnDict['name'] = 'Thomas Street'
-    returnDict['available_bikes'] = '20'
-    returnDict['free_stands'] = '13'
-    #returnDict['title'] = 'Home'
-    return render_template("friday.html", **returnDict)
-
-
-@app.route('/map2')
-def map2():
-    returnDict = {}
-    #returnDict['title'] = 'Home'
-    return render_template("friday2.html", **returnDict)
+@app.route('/getjson')
+def getjson():
+    c = {}
+    c['name'] = 'Thomas Street', 'James Street', 'Stephens Green', 'Christchurch Place', 'Excise Walk', 'Fownes Street Upper', 'Custom House'  
+    c['available_bikes'] = '20','26','29','0','15','21','11'
+    c['free_stands'] = '13','14','15', '0','10','16','8'
+    c['lat'] = 53.3496, 53.3535, 53.336, 53.3434, 53.3478, 53.3446, 53.3483
+    c['lng'] = -6.2782, -6.26531,-6.26298, -6.27012, -6.24424, -6.26337, -6.25466
+    return jsonify(c=c)
 
