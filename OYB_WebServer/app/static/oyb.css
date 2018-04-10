@@ -1,0 +1,71 @@
+body {
+    background-color: lightgray;
+}
+
+
+p, h1, h2 {font-family: 'Jura', Times, serif;}
+
+h1 {
+font-style: italic;
+    font-style: bold;
+text-align: center;
+font-size: 4vw;
+color:black;}
+
+h2 {
+font-style: italic;
+text-align: center;
+font-size: 2vw;
+color:black;}
+
+ #pac-input {
+        background-color: #fff;
+        font-family: 'Jura', Times;
+        font-size: 20px;
+        font-weight: 300;
+        margin-left: 8vw;
+     margin-bottom: 20vw;
+     margin-top: 30px;
+        padding: 4px 15px 0 16px;
+        text-overflow: ellipsis;
+        width: 25vw;
+     max-height: 15vw;
+      }
+
+.pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: 'Jura', Times;
+    margin-right:3vw;
+      }
+
+
+nav{background-color:red;
+width:80%;
+height: 20%;
+line-height: 70%;
+clear:left;
+    
+    
+}
+
+
+button
+{
+    background-color: white;
+  font-family : 'Jura', Arial;
+  font-size   : 100%;
+    padding: 5px 32px;
+    text-decoration: none;
+    display: inline-block;
+    
+    font-size: 16px;
+    font-style: bold;
+    width: 25vw;
+    max-height: 7vw;
+}

@@ -9,7 +9,7 @@ import simplejson
 @app.route('/')
 def index():
     a = {}
-    a['title'] = 'Welcome to OnYourBike DublinBikes app'
+    a['title'] = 'OnYourBike with DublinBikes'
     jsonify(a=a)
     return render_template("index.html", **a)
 
