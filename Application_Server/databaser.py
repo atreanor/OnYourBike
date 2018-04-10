@@ -43,6 +43,7 @@ def inserter_static(a, b, c, d, e, f, g, h):
              contract_name, name, address, lat, lng, banking, bonus) \
            VALUES ('%d', '%s', '%s', '%s', '%f', '%f', '%d', '%d' )"  % \
            (num, con, name, add, lat, lon, bank, bonus)
+    print(name)
     try:
        cur.execute(sql)
        db.commit()
@@ -78,6 +79,9 @@ def insert_owm_current(clouds, cod, coord_lat, coord_long, date_dt, id, humidity
         VALUES ('%d', '%d', '%f', '%f', '%s', '%d', '%d', '%d', '%d','%d','%d', '%s', '%s', '%d', '%s', '%s', '%s')" % \
         (clouds, cod, coord_lat, coord_long, date_dt, id, humidity, pressure, temp, temp_min, temp_max, city, country, sys_id, sys_message, sunrise_dt, sunset_dt)
 
-    cur.execute(sql)
-    db.commit()
-    print("Open Weather Map - Current - SQL statement executed")
+    try:
+        cur.execute(sql)
+        db.commit()
+        #print("Dynamic data - SQL statement executed")
+    except:
+        db.rollback()

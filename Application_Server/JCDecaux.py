@@ -10,6 +10,9 @@ import datetime
  # This will always return the same object
 sys.path.append('.')
 
+#Open a log file:
+logf = open("JCDecaux.log", "w")
+
 # This function initializes the Bike_scraper class:
 
 def JCDecaux_scrape_init ():
@@ -94,21 +97,10 @@ class Bike_scraper:
                 # Execute every 5 minutes  (300 seconds)
                 sleep(300)
 
-            except NameError as e:
-                print(__name__, "-", e)
-                sleep(10)
-                exit()
+            except Exception as e:
+                logf.write(str(e))
+                pass
 
-            except KeyboardInterrupt as e:
-                print("\n You have stopped the scheduler \n Goodbye!")
-                exit()
-
-            #except Exception as ex:
-            #    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-            #    message = template.format(type(ex).__name__, ex.args)
-            #    print(message)
-            #    print(ex)
-            #    exit()
         return 0
 
     def jcd_s_scheduler(self):
@@ -121,19 +113,8 @@ class Bike_scraper:
                 # Execute every 12 hours  (43200 seconds)
                 sleep(43200)
 
-            except NameError as e:
-                print(__name__, "-", e)
-                sleep(10)
-                exit()
+            except Exception as e:
+                logf.write(str(e))
+                pass
 
-            except KeyboardInterrupt as e:
-                print("\n You have stopped the scheduler \n Goodbye!")
-                exit()
-
-            #except Exception as ex:
-            #    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-            #    message = template.format(type(ex).__name__, ex.args)
-            #    print(message)
-            #    print(ex)
-            #    exit()
         return 0

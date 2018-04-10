@@ -9,7 +9,7 @@ from Application_Server import databaser
 from Application_Server import owm
 #from tests import test_basic
 
-print(input, "Welcome to OnYourBike's Application Server!!!")
+print("Welcome to OnYourBike's Application Server!!!")
 
 def bikes_static():
     print("JCDecaux Static Scheduler:")
@@ -34,11 +34,9 @@ def weather():
 
     # Call the MYSQL database connection function:
     databaser.connector()
-
     # Initalize the open weather map scraper class:
     y = owm.owm_connect()
-
     y.owm_scheduler()
 
 if __name__ == "__main__":
-    sys.exit(bikes_dynamic())
+    sys.exit(weather())

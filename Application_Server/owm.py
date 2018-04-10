@@ -10,6 +10,8 @@ import pprint
 # This will always return the same object
 sys.path.append('.')
 
+# Open a log file:
+logf = open("OWM.log", "w")
 
 # This function initializes the owm_scrape class:
 def owm_connect():
@@ -126,14 +128,9 @@ class OpenWeatherMap:
                 # Execute every 0.5 hours  (1800 seconds)
                 sleep(1800)
 
-            except NameError as e:
-                print(__name__, "-", e)
-                sleep(10)
-                exit()
-
-            except KeyboardInterrupt as e:
-                print("\n You have stopped the scheduler \n Goodbye!")
-                exit()
+            except Exception as e:
+                logf.write(str(e))
+            pass
 
         return None
 
