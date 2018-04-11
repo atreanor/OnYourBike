@@ -13,7 +13,6 @@
       var searchBox = new google.maps.places.SearchBox(input);
 
       
-      // Bias the SearchBox results towards current map's viewport.
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
