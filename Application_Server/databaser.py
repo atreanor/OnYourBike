@@ -1,21 +1,23 @@
 # coding=utf-8
 import MySQLdb
 from time import sleep
+import mysql.connector
 
 def connector():
-    global db
+    global cnx
 
     while True:
         try:
-            db = MySQLdb.connect(
+            cnx = mysql.connector.connect(user='Admin', password='UCD_2018', host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com")
+            '''db = MySQLdb.connect(
                 host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com",    # your host, usually localhost
                 user="Admin",         # your username
                 passwd="UCD_2018",  # your password
-                )
+                )'''
             #db = "onyourbikemysql"
             print("Connected to Database Server (AWS RDS)")
             global cur
-            cur = db.cursor()
+            cur = cnx.cursor()
             break
 
         except (MySQLdb.Error, MySQLdb.Warning) as e:
@@ -23,11 +25,8 @@ def connector():
             print("Error details are below:")
             print(e)
             sleep(30)
-        except Exception:
-            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-            message = template.format(type(Exception).__name__, ex.args)
-            print(message)
-            print(Exception)
+        except Exception as e:
+            print(e)
             exit()
 
 def inserter_static(a, b, c, d, e, f, g, h):
@@ -45,11 +44,11 @@ def inserter_static(a, b, c, d, e, f, g, h):
            (num, con, name, add, lat, lon, bank, bonus)
     print(name)
     try:
-       cur.execute(sql)
-       db.commit()
-       print("Static data - SQL statement executed")
+        cur.execute(sql)
+        cur.commit()
+        print("Static data - SQL statement executed")
     except:
-       db.rollback()
+        cnx.rollback()
 
 
 def inserter_dynamic(a, b, c, d, e, f):
@@ -65,23 +64,39 @@ def inserter_dynamic(a, b, c, d, e, f):
            (num, status, bikestands, avail, availbikes, last)
     try:
         cur.execute(sql)
-        db.commit()
+        cur.commit()
         #print("Dynamic data - SQL statement executed")
     except:
-        db.rollback()
+        cnx.rollback()
 
 
-def insert_owm_current(clouds, cod, coord_lat, coord_long, date_dt, id, humidity, pressure, temp, temp_min, temp_max, city, country, sys_id, sys_message, sunrise_dt, sunset_dt):
-    sql = "INSERT INTO OpenWeatherMap.OWM_current (clouds, cod, coord_lat, coord_long," \
-          "date_dt, id, humidity, pressure, temp, temp_min," \
-          "temp_max, city, country, sys_id, sys_message," \
-          " sunrise_dt, sunset_dt) \
-        VALUES ('%d', '%d', '%f', '%f', '%s', '%d', '%d', '%d', '%d','%d','%d', '%s', '%s', '%d', '%s', '%s', '%s')" % \
-        (clouds, cod, coord_lat, coord_long, date_dt, id, humidity, pressure, temp, temp_min, temp_max, city, country, sys_id, sys_message, sunrise_dt, sunset_dt)
+def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description,
+                       coord_lat, coord_long, owm_dt, id, humidity, pressure, temp,
+                       temp_min, temp_max, city, sys_country, sys_id, sys_message,
+                       sys_sunrise_dt, sys_sunset_dt, cod):
+
+    sql_weather = ("INSERT INTO OpenWeatherMap.OWM_current_new "
+                   "(clouds, name, visibility, w_d_main,  w_d_id, w_d_icon,"
+                   "w_description, coord_lat, coord_long, owm_dt, id,"
+                   "humidity, pressure, temp, temp_min, temp_max, city,"
+                   "sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod)"
+                   "VALUES ('%s', '%s', '%s', '%s', '%s',"
+                   "'%s', '%s', '%s', '%s', '%s',"
+                   "'%s', '%s', '%f', '%f', '%s',"
+                   "'%s', '%s', '%s', '%s', '%s',"
+                   "'%s', '%s', '%s')")
+    data_weather = (clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod)
 
     try:
-        cur.execute(sql)
-        db.commit()
-        #print("Dynamic data - SQL statement executed")
-    except:
-        db.rollback()
+        cur.execute(sql_weather, data_weather)
+
+        cnx.commit()
+        print("Dynamic data - SQL statement executed")
+
+    except Exception as e:
+        # logf.write(str(e))
+        cnx.rollback()
+        print("Exception - Insert_owm__current: ", e)
+    pass
+
+

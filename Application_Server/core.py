@@ -38,5 +38,17 @@ def weather():
     y = owm.owm_connect()
     y.owm_scheduler()
 
+
+def testweather():
+
+    # Call the MYSQL database connection function:
+    databaser.connector()
+    # Initalize the open weather map scraper class:
+    y = owm.owm_connect()
+    y.owm_request_current()
+    y.owm_parse_current()
+
+    print(y.name, y.visibility, y.w_d_main, y.w_id, y.w_icon, y.w_description, y.owm_dt)
+
 if __name__ == "__main__":
     sys.exit(weather())
