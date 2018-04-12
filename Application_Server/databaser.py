@@ -81,10 +81,11 @@ def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_d
                    "humidity, pressure, temp, temp_min, temp_max, city,"
                    "sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod)"
                    "VALUES ('%s', '%s', '%s', '%s', '%s',"
-                   "'%s', '%s', '%s', '%s', '%s',"
                    "'%s', '%s', '%f', '%f', '%s',"
                    "'%s', '%s', '%s', '%s', '%s',"
+                   "'%s', '%s', '%s', '%f', '%s',"
                    "'%s', '%s', '%s')")
+
     data_weather = (clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod)
 
     try:
