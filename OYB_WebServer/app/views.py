@@ -17,6 +17,7 @@ def index():
 def getjson():
     c = {}
     c['name'] = 'Thomas Street', 'James Street', 'Stephens Green', 'Christchurch Place', 'Excise Walk', 'Fownes Street Upper', 'Custom House'  
+    c['number']= 1,2,3,4,5,6,7
     c['available_bikes'] = '20','26','29','0','15','21','11'
     c['free_stands'] = '13','14','15', '0','10','16','8'
     c['lat'] = 53.3496, 53.3535, 53.336, 53.3434, 53.3478, 53.3446, 53.3483

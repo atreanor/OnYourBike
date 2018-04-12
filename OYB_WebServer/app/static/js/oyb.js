@@ -66,15 +66,7 @@
           });
           map.fitBounds(bounds);
         });
-      
-      
-      
-      
-      
-      
-      
-      
-      
+         
       
   } // end initMap
                   
@@ -89,6 +81,7 @@
          var free_stands = data.c.free_stands;
          var lat = data.c.lat;
          var lng = data.c.lng;
+         var number = data.c.number;
          
          //(i in data)
          // (var i = 0; i < coords.length; i++)
@@ -103,7 +96,7 @@
             map: map
           }); 
                 
-        attachContent(marker, names[i], available_bikes[i], free_stands[i]);
+        attachContent(marker, names[i], available_bikes[i], free_stands[i], number[i]);
 
             } // end for loop
      
@@ -122,13 +115,12 @@ console.log( "complete" );
      
  }// end function createMarkers
             
-      
             
             // Attaches an info window to a marker with the provided station info. When the
       // marker is clicked, the info window will open with the station info.
-      function attachContent(marker, names, avbikes, freestands) {
+      function attachContent(marker, names, avbikes, freestands, number) {
         var infowindow = new google.maps.InfoWindow({
-          content: "<b>Station: </b>" + names + "<br>"+ "<b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands
+          content: "<b>Station: </b>" + names + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands
         });
 
           
@@ -139,5 +131,18 @@ console.log( "complete" );
       }   // end function attachContent         
                 
        
-      
+         function myFunction() {
+    alert("WEATHER INFO GOES HERE!!!");
+}
+
+ 
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+
     
