@@ -9,7 +9,7 @@ font-size: 2vw;
 color:black;}
 
 
-p, h1, h2 {font-family: 'Jura', Times, serif;}
+p, h1, h2 {font-family: 'Jura', Times, serif; margin-left: 7vw;}
 
 h1 {
 font-style: italic;
@@ -25,9 +25,9 @@ color:black;}
         font-family: 'Jura', Times;
         font-size: 20px;
         font-weight: 300;
-        margin-left: 8vw;
+        margin-left: 7vw;
      margin-bottom: 20vw;
-     margin-top: 30px;
+     margin-top: 5px;
         padding: 4px 15px 0 16px;
         text-overflow: ellipsis;
         width: 25vw;
@@ -65,9 +65,33 @@ button
     padding: 5px 32px;
     text-decoration: none;
     display: inline-block;
-    
+/*    margin-bottom: 2vw;*/
     font-size: 16px;
     font-style: bold;
     width: 25vw;
     max-height: 7vw;
+    position: relative;
+    margin-left:35%;
+/*           z-index: -1; */
 }
+
+
+/*NB I (Sheena Davitt) created the style below for an overlay in my PHP project for web development last term */
+#overlay2 {
+    background-color: rgba(0,0,0,0.8); 
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%); 
+    cursor: pointer;  
+    width: 100%; 
+    height: 100%;
+    font-family: 'jura', arial;
+    z-index: 2;
+}
+

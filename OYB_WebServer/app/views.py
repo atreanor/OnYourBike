@@ -24,3 +24,13 @@ def getjson():
     c['lng'] = -6.2782, -6.26531,-6.26298, -6.27012, -6.24424, -6.26337, -6.25466
     return jsonify(c=c)
 
+
+@app.route('/getweather')
+def getweather():
+    w = {}
+    w['description'] = {"main":"clouds","description":"overcast clouds","icon":"04n"} 
+    w['temp']= 12
+    w['tempmin'] = 7
+    return jsonify(w=w)
+
+

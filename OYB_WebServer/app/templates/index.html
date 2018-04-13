@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-      
-     
+      <meta http-equiv="refresh" content="300" />
+      <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+
       <link rel="stylesheet" href="../static/oyb.css">
       
     <style>
@@ -10,13 +12,14 @@
         height: 350px;
         width: 85%;
         margin:auto;
-        margin-top:10px;
+           position: fixed;
+           z-index: 0;
+           display:block;
+        
        }
     </style>
       
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      
-    
 
       <link rel='stylesheet' type="text/css" href='https://fonts.googleapis.com/css?family=Jura'>
       
@@ -40,21 +43,29 @@
       
      <h1> {{ title }}</h1>
       
-      
+      <div id="overlay2" onclick="off()"><div id="text"></div></div>
 
-      <button style="margin-left: 9vw">Morning forecast</button><button>Afternoon forecast</button><button>Evening forecast</button>
+      <button onclick="on(); displayWeather()"> Get current weather</button>
       
       
+      
+      <br><br><br>
+      
+     
       
     <div id="map"></div>
       
+      <br>
+      <p><b>  Type in a streetname or area below to see it on the map</b> </p>
       
     <input id="pac-input" class="controls" type="text" placeholder="Search for a street">  
       
       
       
       
-      <button style="margin-left:3vw">Refresh Map</button>
+<!--
+      <button style="margin-left:3vw"; z-index="-1">Refresh Map</button>
       
+-->
   </body>
 </html>

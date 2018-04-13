@@ -131,18 +131,63 @@ console.log( "complete" );
       }   // end function attachContent         
                 
        
-         function myFunction() {
-    alert("WEATHER INFO GOES HERE!!!");
-}
-
- 
+  
 function on() {
-    document.getElementById("overlay").style.display = "block";
+    document.getElementById("overlay2").style.display = "block";
 }
 
 function off() {
-    document.getElementById("overlay").style.display = "none";
+    document.getElementById("overlay2").style.display = "none";
 }
+
+//var weather = "WEATHER TEXT HERE!!!";
+
+
+//function displayWeather() {
+//                
+//                document.getElementById("overlay2").innerHTML = weather;
+//            }
+
+
+
+
+function displayWeather(){
+     
+     $.getJSON('http://127.0.0.1:5000/getweather', function(data)
+               {
+     console.log("success", data);
+     var weather = "WEATHER FROM displayweather FUNCTION";
+         
+         var main = data.w.description.main;
+         var desc = data.w.description.description;
+         var icon = data.w.description.icon;
+         var temp = data.w.temp;
+         var tempmin = data.w.tempmin;
+         
+         var weathercontent = "The weather in Dublin: <br><br>" + main + ". Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
+         
+         document.getElementById("overlay2").innerHTML = weathercontent;
+         
+         
+         
+     })// end function data
+         .done(function() {
+console.log( "second success" );
+})
+  .fail(function() {
+console.log( "error" );
+})   
+     
+  .always(function() {
+console.log( "complete" );
+});   
+     
+ }//
+
+
+
+
+
 
 
     
