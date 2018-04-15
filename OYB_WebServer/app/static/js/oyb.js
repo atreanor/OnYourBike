@@ -1,4 +1,4 @@
-      
+      // NB map code and marker code and are all adapted from googlemaps api tutorial code
   function initMap() {
       var centre = new google.maps.LatLng(53.34,-6.26);      
       var mapOptions = {
@@ -9,32 +9,22 @@
     
       var input = document.getElementById('pac-input');
       
-      
+      // The following code from googlemaps tutorial adds a search box and formats it so that a marker will appear on our map to tell user where the street they are looking for is
       var searchBox = new google.maps.places.SearchBox(input);
-
-      
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
-      
       var markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
         searchBox.addListener('places_changed', function() {
           var places = searchBox.getPlaces();
 
           if (places.length == 0) {
-            return;
-          }
-
-          // Clear out the old markers.
+            return; }
           markers.forEach(function(marker) {
             marker.setMap(null);
           });
           markers = [];
       
-      
-       // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
           places.forEach(function(place) {
             if (!place.geometry) {
@@ -49,7 +39,6 @@
               scaledSize: new google.maps.Size(25, 25)
             };
 
-            // Create a marker for each place.
             markers.push(new google.maps.Marker({
               map: map,
               icon: icon,
@@ -58,7 +47,6 @@
             }));
 
             if (place.geometry.viewport) {
-              // Only geocodes have viewport.
               bounds.union(place.geometry.viewport);
             } else {
               bounds.extend(place.geometry.location);
@@ -68,8 +56,13 @@
         });
          
       
+      
+      
+      
   } // end initMap
-                  
+     
+
+var infowindow = new google.maps.InfoWindow();
             
  function createMarkers(map){
      
@@ -83,8 +76,8 @@
          var lng = data.c.lng;
          var number = data.c.number;
          
-         //(i in data)
-         // (var i = 0; i < coords.length; i++)
+         
+    
             for (var i = 0; i < names.length; i++)
             {                     
                      
@@ -95,6 +88,8 @@
             }, // end position brackets
             map: map
           }); 
+                
+      
                 
         attachContent(marker, names[i], available_bikes[i], free_stands[i], number[i]);
 
@@ -115,22 +110,26 @@ console.log( "complete" );
      
  }// end function createMarkers
             
-            
-            // Attaches an info window to a marker with the provided station info. When the
-      // marker is clicked, the info window will open with the station info.
-      function attachContent(marker, names, avbikes, freestands, number) {
-        var infowindow = new google.maps.InfoWindow({
-          content: "<b>Station: </b>" + names + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands
-        });
 
+//       Attaches an info window to a marker with the provided station info. When the
+//      marker is clicked, the info window will open with the station info.
+      function attachContent(marker, names, avbikes, freestands, number) {
+
+                  var content =  "<b>Station: </b>" + names + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands
+     
+        google.maps.event.addListener(marker, 'click', function() {
+   infowindow.setContent(content);
+   infowindow.open(map, this);
+});
           
-        marker.addListener('click', function() {
-            infowindow.close(marker.get('map'), marker);
-          infowindow.open(marker.get('map'), marker);
-        });
-      }   // end function attachContent         
-                
+    
        
+      }   // end function attachContent         
+               
+       
+                      
+                           
+                           
   
 function on() {
     document.getElementById("overlay2").style.display = "block";
@@ -140,13 +139,7 @@ function off() {
     document.getElementById("overlay2").style.display = "none";
 }
 
-//var weather = "WEATHER TEXT HERE!!!";
 
-
-//function displayWeather() {
-//                
-//                document.getElementById("overlay2").innerHTML = weather;
-//            }
 
 
 
