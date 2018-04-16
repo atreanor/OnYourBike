@@ -9,12 +9,7 @@ def connector():
     while True:
         try:
             cnx = mysql.connector.connect(user='Admin', password='UCD_2018', host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com")
-            '''db = MySQLdb.connect(
-                host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com",    # your host, usually localhost
-                user="Admin",         # your username
-                passwd="UCD_2018",  # your password
-                )'''
-            #db = "onyourbikemysql"
+
             print("Connected to Database Server (AWS RDS)")
             global cur
             cur = cnx.cursor()
@@ -25,29 +20,11 @@ def connector():
             print("Error details are below:")
             print(e)
             sleep(30)
+            pass
         except Exception as e:
             print(e)
-            exit()
-
-def inserter_static(a, b, c, d, e, f, g, h):
-    num=a
-    con=b
-    name=c
-    add=d
-    lat=e
-    lon=f
-    bank=g
-    bonus=h
-    sql = "INSERT INTO onyourbikemysql.JCD_static_data (number,\
-             contract_name, name, address, lat, lng, banking, bonus) \
-           VALUES ('%d', '%s', '%s', '%s', '%f', '%f', '%d', '%d' )"  % \
-           (num, con, name, add, lat, lon, bank, bonus)
-    try:
-        cur.execute(sql)
-        cnx.commit()
-        print("Static data - SQL statement executed")
-    except:
-        cnx.rollback()
+            sleep(30)
+            pass
 
 
 def inserter_dynamic(a, b, c, d, e, f):
@@ -67,6 +44,7 @@ def inserter_dynamic(a, b, c, d, e, f):
         # print("Dynamic data - SQL statement executed")
     except:
         cnx.rollback()
+        pass
 
 
 def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod):
@@ -94,20 +72,17 @@ def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_d
         # logf.write(str(e))
         cnx.rollback()
         print("Exception - Insert_owm__current: ", e)
-    pass
+        pass
 
 
-
-def insert_JCD_flask(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, OYB_timestamp, lat, lng, banking, bonus):
+def insert_jdc_flask(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, lat, lng, banking, bonus):
 
     sql_flask = ("INSERT INTO onyourbikemysql.JCD_flask"
-                   "(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, OYB_timestamp, lat, lng, banking, bonus)"
+                   "(number, name, contract_name, status, bike_stands, available_bike_stands,available_bikes, last_update, address, lat, lng, banking, bonus)"
                    "VALUES ('%d', '%s', '%s', '%s', '%d',"
-                   "'%d', '%d', '%s', '%s', '%s',"
+                   "'%d', '%s', '%s', '%s',"
                    "'%f', '%f', '%d', '%d')" %
-                   (number, name, contract_name, status, bike_stands, available_bike_stands, 
-                    available_bikes, last_update, address, 
-                    OYB_timestamp, lat, lng, banking, bonus))
+                   (number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, lat, lng, banking, bonus))
 
     try:
         cur.execute(sql_flask)
@@ -119,4 +94,5 @@ def insert_JCD_flask(number, name, contract_name, status, bike_stands, available
         # logf.write(str(e))
         cnx.rollback()
         print("Exception - Insert_JCD_flask: ", e)
-    pass
+        pass
+

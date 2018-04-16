@@ -11,18 +11,16 @@ from Application_Server import owm
 
 print("Welcome to OnYourBike's Application Server!!!")
 
-def bikes_static():
-    print("JCDecaux Static Scheduler:")
+def bikes_flask():
     # Call the MYSQL database connection function:
     databaser.connector()
     # Initalize the Bike_scraper class:
-    static = JCDecaux.JCDecaux_scrape_init()
-
-    #start the static scheduler:
-    static.jcd_s_scheduler()
+    jcd_flask = JCDecaux.JCDecaux_scrape_init()
+    #start the jdc_flask_scheduler:
+    jcd_flask.jcd_flask_scheduler()
 
 def bikes_dynamic():
-    print("JCDecaux Dynamic Scheduler:")
+    print("JCDecaux Dynamic Table Scheduler:")
     # Call the MYSQL database connection function:
     databaser.connector()
     # Initalize the Bike_scraper class:
@@ -38,17 +36,5 @@ def weather():
     y = owm.owm_connect()
     y.owm_scheduler()
 
-
-def testweather():
-
-    # Call the MYSQL database connection function:
-    databaser.connector()
-    # Initalize the open weather map scraper class:
-    y = owm.owm_connect()
-    y.owm_request_current()
-    y.owm_parse_current()
-
-    print(y.name, y.visibility, y.w_d_main, y.w_id, y.w_icon, y.w_description, y.owm_dt)
-
 if __name__ == "__main__":
-    sys.exit(bikes_static())
+    sys.exit()

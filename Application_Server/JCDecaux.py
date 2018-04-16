@@ -48,10 +48,10 @@ class Bike_scraper:
         api_url = "https://api.jcdecaux.com/vls/v1/stations?contract="+self.contract+"&apiKey="+self.apikey+""
         response = requests.get(api_url)
         json_response = json.loads(response.content)
-        #print("Response received from JC Decaux:", response.status_code)
+        print("JCD response:", response.status_code)
         return json_response
 
-    def parse_static(self, json_response):
+    def parse_flask(self, json_response):
 
         print("Length of dynamic json is ", len(json_response))
         for i in json_response:
@@ -64,8 +64,17 @@ class Bike_scraper:
             self.s_lng = i['position']['lng']
             self.s_banking = (i['banking'])
             self.s_bonus = (i['bonus'])
-            databaser.inserter_static(self.number, self.s_contract_name, self.s_name, self.s_address, self.s_lat, self.s_lng, self.s_banking, self.s_bonus)
-        print("Static data parsed and SQL insert statements executed")
+            self.d_status = (i['status'])
+            self.d_bike_stands = (i['bike_stands'])
+            self.d_available_bike_stands = (i['available_bike_stands'])
+            self.d_available_bikes = (i['available_bikes'])
+            self.d_last_update = (i['last_update'])
+            # Execute insert function:
+            self.execute_flask_insert()
+        return 0
+
+    def execute_flask_insert(self):
+        databaser.insert_jdc_flask(self.number, self.s_name, self.s_contract_name, self.d_status, self.d_bike_stands, self.d_available_bike_stands, self.d_available_bikes, self.d_last_update, self.s_address, self.s_lat, self.s_lng, self.s_banking, self.s_bonus)
 
         return 0
 
@@ -93,6 +102,7 @@ class Bike_scraper:
             try:
                 print("JCD Dynamic scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
                 json_response = self.scrape_jcdecaux()
+                sleep(5)
                 self.parse_dynamic(json_response)
                 # Execute every 5 minutes  (300 seconds)
                 sleep(300)
@@ -103,13 +113,14 @@ class Bike_scraper:
 
         return 0
 
-    def jcd_s_scheduler(self):
+    def jcd_flask_scheduler(self):
 
         while True:
             try:
-                print("JCD Static scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+                print("JCD Flask scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
                 json_response = self.scrape_jcdecaux()
-                self.parse_static(json_response)
+                sleep(5)
+                self.parse_flask(json_response)
                 # Execute every 12 hours  (43200 seconds)
                 sleep(43200)
 
@@ -117,4 +128,4 @@ class Bike_scraper:
                 logf.write(str(e))
                 pass
 
-        return 0
+            return 0

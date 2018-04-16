@@ -94,8 +94,6 @@ class OpenWeatherMap:
                   + ","+self._owm_country+"&appid="+self._owm_key+"&units=metric"
         response = requests.get(api_url)
         self.owm_json = json.loads(response.content)
-
-        print(self.owm_json)
         print("Response received from Open Weather Map:", response.status_code)
         return None
 
