@@ -1,5 +1,6 @@
 from flask import render_template
 from flask import jsonify
+from flask import g
 from app import app
 from app import model
 import json
