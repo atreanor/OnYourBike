@@ -1,12 +1,54 @@
 from flask import render_template
+from flask import Flask
 from flask import jsonify
 from flask import g
 from app import app
 from app import model
 import json
 import simplejson
+#import sqlalchemy
+#from flask.ext.sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
+
+from sqlalchemy import create_engine
+#from instance import config
+
+#from config import *  
 
 
+USER="Admin"
+PASSWORD="UCD_2018"
+URI="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com"
+PORT="3306"
+DB = "onyourbikemysql"
+
+
+
+
+# three database connect/close connection functions:
+def connect_to_database():
+    ''' method to connect to database ''' 
+    #return engine = create_engine("mysql+mysqldb://{}@{}:{}/{}".format(config.USER, config.PASSWORD, config.URI, config.PORT, config.DB), echo=True)
+    engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URI, PORT, DB), echo=True)
+    return engine 
+
+def get_db():
+    ''' method to get database '''
+    db = getattr(g, 'onyourbikemysql', None)
+    if db is None:
+        db = g._database = connect_to_database()
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    ''' method to close connection with database '''
+    db = getattr(g, 'onyourbikemysql', None)
+    if db is not None:
+        db.close()
+
+
+
+#Flask functions to query DB and return jsonified version of query results
 @app.route('/')
 def index():
     a = {}
@@ -16,14 +58,14 @@ def index():
 
 @app.route('/getjson')
 def getjson():
-    c = {}
-    c['name'] = 'Thomas Street', 'James Street', 'Stephens Green', 'Christchurch Place', 'Excise Walk', 'Fownes Street Upper', 'Custom House'  
-    c['number']= 1,2,3,4,5,6,7
-    c['available_bikes'] = '20','26','29','0','15','21','11'
-    c['free_stands'] = '13','14','15', '0','10','16','8'
-    c['lat'] = 53.3496, 53.3535, 53.336, 53.3434, 53.3478, 53.3446, 53.3483
-    c['lng'] = -6.2782, -6.26531,-6.26298, -6.27012, -6.24424, -6.26337, -6.25466
-    return jsonify(c=c)
+    engine = get_db()
+    info = []
+    rows = engine.execute("SELECT name, number, available_bike_stands, available_bikes, lat, lng FROM JCD_final_query_table")
+    for row in rows:
+        info.append(dict(row))
+    return jsonify(info=info)
+
+
 
 
 @app.route('/getweather')
@@ -34,35 +76,9 @@ def getweather():
     w['tempmin'] = 7
     return jsonify(w=w)
 
-#!/usr/bin/env_python
-from flask import Flask, g, jsonify
-app = Flask(__name__)
 
-def connect_to_database():
-    ''' method to connect to database ''' 
-    #return engine = create_engine("mysql+mysqldb://{}@{}:{}/{}".format(config.USER, config.PASSWORD, config.URI, config.PORT, config.DB), echo=True)
-    engine = create_engine("mysql+mysqldb://{}@{}:{}/{}".format(config.USER, config.PASSWORD, config.URI, config.PORT, config.DB), echo=True)
-    return engine 
 
-def get_db():
-    ''' method to get database '''
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = connect_to_databse()
-    return db
 
-@app.teardown_appcontext
-def close_connection(exception):
-    ''' method to close connection with database '''
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-        
-# route to serve 'static/index.html'
-# @app.route('/')
-# def root():
-#    ''' method to serve 'static/index.html' '''
-#    return render_template('index.html', MAPS_APIKEY=app.config["MAPS_APIKEY"])
 
 
 @app.route("/stations")            
@@ -106,7 +122,15 @@ def getWeather():
     for row in rows:
         weather.append(dict(row))
     return jsonify(weather=weather)
+
     
-    
-if __name__ == "__main__":
-    app.run(debug=True)
+# @app.route('/getjson')
+# def getjson():
+#     c = {}
+#     c['name'] = 'Thomas Street', 'James Street', 'Stephens Green', 'Christchurch Place', 'Excise Walk', 'Fownes Street Upper', 'Custom House'  
+#     c['number']= 1,2,3,4,5,6,7
+#     c['available_bikes'] = '20','26','29','0','15','21','11'
+#     c['free_stands'] = '13','14','15', '0','10','16','8'
+#     c['lat'] = 53.3496, 53.3535, 53.336, 53.3434, 53.3478, 53.3446, 53.3483
+#     c['lng'] = -6.2782, -6.26531,-6.26298, -6.27012, -6.24424, -6.26337, -6.25466
+#     return jsonify(c=c)
