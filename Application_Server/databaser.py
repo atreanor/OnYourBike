@@ -42,10 +42,9 @@ def inserter_static(a, b, c, d, e, f, g, h):
              contract_name, name, address, lat, lng, banking, bonus) \
            VALUES ('%d', '%s', '%s', '%s', '%f', '%f', '%d', '%d' )"  % \
            (num, con, name, add, lat, lon, bank, bonus)
-    print(name)
     try:
         cur.execute(sql)
-        cur.commit()
+        cnx.commit()
         print("Static data - SQL statement executed")
     except:
         cnx.rollback()
@@ -57,39 +56,36 @@ def inserter_dynamic(a, b, c, d, e, f):
     bikestands=c
     avail=d
     availbikes=e
-    last=f  
-    sql = "INSERT INTO onyourbikemysql.JCD_dynamic_data (number, \
-             status, bike_stands, available_bike_stands, available_bikes, last_update) \
-           VALUES ('%d', '%s', '%d', '%d', '%d', '%s' )" % \
-           (num, status, bikestands, avail, availbikes, last)
+    last=f
+    sql = ("INSERT INTO onyourbikemysql.JCD_dynamic_data"
+           "(number, status, bike_stands, available_bike_stands, available_bikes, last_update)"
+           "VALUES ('%d', '%s', '%d', '%d', '%d', '%s' )" %
+           (num, status, bikestands, avail, availbikes, last))
     try:
         cur.execute(sql)
-        cur.commit()
-        #print("Dynamic data - SQL statement executed")
+        cnx.commit()
+        # print("Dynamic data - SQL statement executed")
     except:
         cnx.rollback()
 
 
-def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description,
-                       coord_lat, coord_long, owm_dt, id, humidity, pressure, temp,
-                       temp_min, temp_max, city, sys_country, sys_id, sys_message,
-                       sys_sunrise_dt, sys_sunset_dt, cod):
+def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod):
 
-    sql_weather = ("INSERT INTO OpenWeatherMap.OWM_current_new "
-                   "(clouds, name, visibility, w_d_main,  w_d_id, w_d_icon,"
-                   "w_description, coord_lat, coord_long, owm_dt, id,"
-                   "humidity, pressure, temp, temp_min, temp_max, city,"
-                   "sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod)"
-                   "VALUES ('%s', '%s', '%s', '%s', '%s',"
+    sql_weather = ("INSERT INTO OpenWeatherMap.OWM_current"
+                   "(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod)"
+                   "VALUES ('%d', '%s', '%s', '%s', '%s',"
                    "'%s', '%s', '%f', '%f', '%s',"
                    "'%s', '%s', '%s', '%s', '%s',"
                    "'%s', '%s', '%s', '%f', '%s',"
-                   "'%s', '%s', '%s')")
-
-    data_weather = (clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod)
+                   "'%s', '%s', '%s')" %
+                   (clouds, name, visibility, w_d_main, w_d_id,
+                    w_d_icon, w_description, coord_lat, coord_long, owm_dt,
+                    id, humidity, pressure, temp, temp_min,
+                    temp_max, city, sys_country, sys_id, sys_message,
+                    sys_sunrise_dt, sys_sunset_dt, cod))
 
     try:
-        cur.execute(sql_weather, data_weather)
+        cur.execute(sql_weather)
 
         cnx.commit()
         print("Dynamic data - SQL statement executed")

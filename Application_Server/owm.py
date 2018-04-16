@@ -91,7 +91,7 @@ class OpenWeatherMap:
 
     def owm_request_current(self):
         api_url = "http://api.openweathermap.org/data/2.5/weather?q="+self._owm_city+","\
-                  + self._owm_country+"&appid="+self._owm_key
+                  + ","+self._owm_country+"&appid="+self._owm_key+"&units=metric"
         response = requests.get(api_url)
         self.owm_json = json.loads(response.content)
 
@@ -102,9 +102,7 @@ class OpenWeatherMap:
     def owm_parse_current(self):
         self.clouds = self.owm_json['clouds'][('all')]
         self.name = self.owm_json['name']
-        print(self.name)
         self.visibility = self.owm_json['visibility']
-        print(self.visibility)
         # Parse general weather description:
         self.w_d_main = self.owm_json['weather'][0]['main']
         self.w_d_id = self.owm_json['weather'][0]['id']
@@ -126,11 +124,10 @@ class OpenWeatherMap:
         self.sys_country = self.owm_json['sys']['country']
         self.sys_id = self.owm_json['sys']['id']
         self.sys_message = self.owm_json['sys']['message']
-        self.sys_sunrise_dt = self.owm_json['sys']['sunrise']
-        self.sys_sunset_dt = self.owm_json['sys']['sunset']
+        self.sys_sunrise_dt = datetime.datetime.fromtimestamp(self.owm_json['sys']['sunrise'])
+        self.sys_sunset_dt = datetime.datetime.fromtimestamp(self.owm_json['sys']['sunset'])
         self.sys_type = self.owm_json['sys']['type']
 
-        print(self.sys_country, self.w_d_main)
         return 0
 
     def owm_scheduler(self):
@@ -139,20 +136,15 @@ class OpenWeatherMap:
                 self.owm_request_current()
                 # Sleep 5 is required to not accidentally violate OWM T&C
                 sleep(5)
-                print("why is this being requested?")
                 self.owm_parse_current()
                 print("Parsed!")
-                databaser.insert_owm_current(self.clouds, self.name, self.visibility, self.w_d_main, self.w_d_id, self.w_d_icon, self.w_description, self.coord_lat, self.coord_long, self.owm_dt, self.id, self.humidity,self.pressure, self.temp, self.temp_min, self.temp_max, self.city, self.sys_country, self.sys_id, self.sys_message, self.sys_sunrise_dt, self.sys_sunset_dt, self.cod)
-
-                #print("This is a test:", self.clouds, self.name, self.visibility, self.w_d_main, self.w_d_id, self.w_d_icon, self.w_description, self.coord_lat, self.coord_long, self.owm_dt, self.id, self.humidity,self.pressure, self.temp, self.temp_min, self.temp_max, self.city, self.sys_country, self.sys_id, self.sys_message, self.sys_sunrise_dt, self.sys_sunset_dt, self.cod)
-                # temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise, sys_sunset, cod
+                databaser.insert_owm_current(self.clouds, self.name, self.visibility, self.w_d_main, self.w_d_id, self.w_d_icon, self.w_description, self.coord_lat, self.coord_long, self.owm_dt, self.id, self.humidity, self.pressure, self.temp, self.temp_min, self.temp_max, self.city, self.sys_country, self.sys_id, self.sys_message, self.sys_sunrise_dt, self.sys_sunset_dt, self.cod)
 
                 # Execute every 0.5 hours  (1800 seconds)
-                print("wtf")
                 sleep(1800)
 
             except Exception as e:
-                # logf.write(str(e))
+                logf.write(str(e))
                 print("Exception: ", e)
             pass
 

@@ -51,4 +51,4 @@ def testweather():
     print(y.name, y.visibility, y.w_d_main, y.w_id, y.w_icon, y.w_description, y.owm_dt)
 
 if __name__ == "__main__":
-    sys.exit(weather())
+    sys.exit(bikes_static())
