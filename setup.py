@@ -23,7 +23,7 @@ setup(
     packages=find_packages(exclude=('tests', 'docs')),
     entry_points = {
     'console_scripts': [
-        'bikes_static=Application_Server.core:bikes_static',
+        'bikes_static=Application_Server.core:bikes_flask',
         'bikes_dynamic=Application_Server.core:bikes_dynamic',
         'weather=Application_Server.core:weather',
     ],

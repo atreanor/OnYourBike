@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/Application_Server/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/core.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application_Server/databaser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/databaser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application_Server/owm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/owm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,35 +17,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="owm.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application_Server/owm.py">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12">
-              <caret line="128" column="7" lean-forward="true" selection-start-line="128" selection-start-column="7" selection-end-line="128" selection-end-column="7" />
-              <folding>
-                <element signature="e#24#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="529">
+              <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="core.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="core.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application_Server/core.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
+            <state relative-caret-position="584">
               <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="databaser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application_Server/databaser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-              <folding>
-                <element signature="e#15#29#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -114,12 +100,12 @@
         <option value="$PROJECT_DIR$/OnYourBike/core.py" />
         <option value="$PROJECT_DIR$/OnYourBike/databaser.py" />
         <option value="$PROJECT_DIR$/OnYourBike/owm.py" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
         <option value="$PROJECT_DIR$/Application_Server/JCDecaux.py" />
         <option value="$PROJECT_DIR$/Application_Server/owm.py" />
         <option value="$PROJECT_DIR$/Application_Server/databaser.py" />
         <option value="$PROJECT_DIR$/Application_Server/core.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -313,10 +299,10 @@
     <frame x="98" y="35" width="2462" height="1565" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49006623" visible="true" weight="0.24234904" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49006623" visible="true" weight="0.24234904" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50041354" side_tool="true" weight="0.41427463" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49958643" visible="true" weight="0.26609775" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49958643" visible="true" weight="0.26609775" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Python Console" order="8" />
       <window_info id="Structure" order="1" sideWeight="0.50993377" side_tool="true" weight="0.27295285" />
@@ -675,13 +661,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application_Server/JCDecaux/core.py" />
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -721,8 +700,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application_Server/core.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
+        <state relative-caret-position="584">
           <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
         </state>
       </provider>
     </entry>
