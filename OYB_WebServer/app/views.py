@@ -80,48 +80,48 @@ def getweather():
 
 
 
+# 
+# @app.route("/stations")            
+# def getStationLite():
+#     ''' method to retrieve station data required to populate markers when app is launched '''
+#     #create connection with database on RDS
+#     engine = get_db()
+#     
+#     # initialise stations list
+#     stations = []
+#     # MySQL query to retrieve data
+#     rows = engine.execute("SELECT number, position FROM JCD_staticdata;")
+#     for row in rows:
+#         stations.append(dict(row))
+#     return jsonify(stations=stations)
 
-@app.route("/stations")            
-def getStationLite():
-    ''' method to retrieve station data required to populate markers when app is launched '''
-    #create connection with database on RDS
-    engine = get_db()
-    
-    # initialise stations list
-    stations = []
-    # MySQL query to retrieve data
-    rows = engine.execute("SELECT number, position FROM JCD_staticdata;")
-    for row in rows:
-        stations.append(dict(row))
-    return jsonify(stations=stations)
 
-
-def getStationInfo():
-    ''' method to retrieve a larger data set to populate additional station info & on a refresh of the app '''
-    #create connection with database on RDS
-    engine = get_db()
-    
-    # initialise list
-    info = []
-    # MySQL query to retrieve data
-    rows = engine.execute("SELECT number, address, banking, status, bike_stands, available_bike_stands, available_bikes, last_update FROM JCD_dynamicdata, JCD_staticdata WHERE number.JCD_dynamic_data = number.JCD_static_data;")
-    for row in rows:
-        info.append(dict(row))
-    return jsonify(info=info)
-    
-
-def getWeather():
-    ''' method to retrieve weather data on launch of app  '''
-    #create connection with database on RDS
-    engine = get_db()
-     
-    # initialise list
-    weather = []
-    # MySQL query to retrieve data
-    rows = engine.execute("SELECT ..... FROM .... ;")
-    for row in rows:
-        weather.append(dict(row))
-    return jsonify(weather=weather)
+# def getStationInfo():
+#     ''' method to retrieve a larger data set to populate additional station info & on a refresh of the app '''
+#     #create connection with database on RDS
+#     engine = get_db()
+#     
+#     # initialise list
+#     info = []
+#     # MySQL query to retrieve data
+#     rows = engine.execute("SELECT number, address, banking, status, bike_stands, available_bike_stands, available_bikes, last_update FROM JCD_dynamicdata, JCD_staticdata WHERE number.JCD_dynamic_data = number.JCD_static_data;")
+#     for row in rows:
+#         info.append(dict(row))
+#     return jsonify(info=info)
+#     
+# 
+# def getWeather():
+#     ''' method to retrieve weather data on launch of app  '''
+#     #create connection with database on RDS
+#     engine = get_db()
+#      
+#     # initialise list
+#     weather = []
+#     # MySQL query to retrieve data
+#     rows = engine.execute("SELECT ..... FROM .... ;")
+#     for row in rows:
+#         weather.append(dict(row))
+#     return jsonify(weather=weather)
 
     
 # @app.route('/getjson')
