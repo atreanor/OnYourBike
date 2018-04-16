@@ -56,7 +56,7 @@ def index():
 def getjson():
     engine = get_db()
     info = []
-    rows = engine.execute("SELECT name, number, available_bike_stands, available_bikes, lat, lng FROM JCD_final_query_table")
+    rows = engine.execute("SELECT name, number, available_bike_stands, available_bikes, lat, lng FROM JCD_flask")
     for row in rows:
         info.append(dict(row))
     return jsonify(info=info)

@@ -68,31 +68,43 @@ var infowindow = new google.maps.InfoWindow();
      
      $.getJSON('http://127.0.0.1:5000/getjson', function(data)
                {
-     console.log("success", data);
-         var names = data.c.name;
-         var available_bikes = data.c.available_bikes;
-         var free_stands = data.c.free_stands;
-         var lat = data.c.lat;
-         var lng = data.c.lng;
-         var number = data.c.number;
          
+         console.log("success", data);
+         
+         //(i in data)
+         
+            //var size = Object.keys(data).length;
          
     
-            for (var i = 0; i < names.length; i++)
+            for (var i = 0; i < 99; i++)
+                
+                
+                
             {                     
-                     
+                    
+            var name = data.info[i].name;   
+             var available_bikes = data.info[i].available_bikes;
+         var free_stands = data.info[i].available_bike_stands;
+         var lat = data.info[i].lat;
+         var lng = data.info[i].lng;
+         var number = data.info[i].number;   
+                
+                
+                
                var marker = new google.maps.Marker({
             position: {
-                lat:lat[i],
-                lng:lng[i]   
+                lat:lat,
+                lng:lng   
             }, // end position brackets
             map: map
           }); 
                 
       
                 
-        attachContent(marker, names[i], available_bikes[i], free_stands[i], number[i]);
+        attachContent(marker, name, available_bikes, free_stands, number);
 
+            
+                
             } // end for loop
      
          
@@ -111,11 +123,14 @@ console.log( "complete" );
  }// end function createMarkers
             
 
+
+
+
 //       Attaches an info window to a marker with the provided station info. When the
 //      marker is clicked, the info window will open with the station info.
-      function attachContent(marker, names, avbikes, freestands, number) {
+      function attachContent(marker, name, avbikes, freestands, number) {
 
-                  var content =  "<b>Station: </b>" + names + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands
+                  var content =  "<b>Station: </b>" + name + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands
      
         google.maps.event.addListener(marker, 'click', function() {
    infowindow.setContent(content);
