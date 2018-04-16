@@ -97,3 +97,26 @@ def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_d
     pass
 
 
+
+def insert_JCD_flask(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, OYB_timestamp, lat, lng, banking, bonus):
+
+    sql_flask = ("INSERT INTO onyourbikemysql.JCD_flask"
+                   "(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, OYB_timestamp, lat, lng, banking, bonus)"
+                   "VALUES ('%d', '%s', '%s', '%s', '%d',"
+                   "'%d', '%d', '%s', '%s', '%s',"
+                   "'%f', '%f', '%d', '%d')" %
+                   (number, name, contract_name, status, bike_stands, available_bike_stands, 
+                    available_bikes, last_update, address, 
+                    OYB_timestamp, lat, lng, banking, bonus))
+
+    try:
+        cur.execute(sql_flask)
+
+        cnx.commit()
+        print("insert_JCD_flask - SQL statement executed")
+
+    except Exception as e:
+        # logf.write(str(e))
+        cnx.rollback()
+        print("Exception - Insert_JCD_flask: ", e)
+    pass
