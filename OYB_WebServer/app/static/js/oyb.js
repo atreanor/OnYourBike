@@ -66,22 +66,16 @@ var infowindow = new google.maps.InfoWindow();
             
  function createMarkers(map){
      
-     $.getJSON('http://127.0.0.1:5000/getjson', function(data)
+     $.getJSON('http://127.0.0.1:5000/getStations', function(data)
                {
          
          console.log("success", data);
          
-         //(i in data)
-         
-            //var size = Object.keys(data).length;
-         
+         var size = Object.keys(data.info).length;
+           
     
-            for (var i = 0; i < 99; i++)
-                
-                
-                
-            {                     
-                    
+            for (var i = 0; i < size; i++)  
+            {                           
             var name = data.info[i].name;   
              var available_bikes = data.info[i].available_bikes;
          var free_stands = data.info[i].available_bike_stands;
@@ -89,8 +83,7 @@ var infowindow = new google.maps.InfoWindow();
          var lng = data.info[i].lng;
          var number = data.info[i].number;   
                 
-                
-                
+
                var marker = new google.maps.Marker({
             position: {
                 lat:lat,
@@ -147,11 +140,11 @@ console.log( "complete" );
                            
   
 function on() {
-    document.getElementById("overlay2").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
 }
 
 function off() {
-    document.getElementById("overlay2").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
 }
 
 
@@ -164,7 +157,9 @@ function displayWeather(){
      $.getJSON('http://127.0.0.1:5000/getweather', function(data)
                {
      console.log("success", data);
-     var weather = "WEATHER FROM displayweather FUNCTION";
+   
+         
+         
          
          var main = data.w.description.main;
          var desc = data.w.description.description;
@@ -174,7 +169,7 @@ function displayWeather(){
          
          var weathercontent = "The weather in Dublin: <br><br>" + main + ". Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
          
-         document.getElementById("overlay2").innerHTML = weathercontent;
+         document.getElementById("overlay").innerHTML = weathercontent;
          
          
          

@@ -77,7 +77,7 @@ button
 
 
 /*NB I (Sheena Davitt) created the style below for an overlay in my PHP project for web development last term */
-#overlay2 {
+#overlay {
     background-color: rgba(0,0,0,0.8); 
     display: none;
     position: fixed;

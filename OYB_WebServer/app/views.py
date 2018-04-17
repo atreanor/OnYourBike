@@ -52,8 +52,8 @@ def index():
     jsonify(a=a)
     return render_template("index.html", **a)
 
-@app.route('/getjson')
-def getjson():
+@app.route('/getStations')
+def getStations():
     engine = get_db()
     info = []
     rows = engine.execute("SELECT name, number, available_bike_stands, available_bikes, lat, lng FROM JCD_flask")
@@ -75,21 +75,6 @@ def getweather():
 
 
 
-
-# 
-# @app.route("/stations")            
-# def getStationLite():
-#     ''' method to retrieve station data required to populate markers when app is launched '''
-#     #create connection with database on RDS
-#     engine = get_db()
-#     
-#     # initialise stations list
-#     stations = []
-#     # MySQL query to retrieve data
-#     rows = engine.execute("SELECT number, position FROM JCD_staticdata;")
-#     for row in rows:
-#         stations.append(dict(row))
-#     return jsonify(stations=stations)
 
 
 # def getStationInfo():
@@ -119,14 +104,4 @@ def getweather():
 #         weather.append(dict(row))
 #     return jsonify(weather=weather)
 
-    
-# @app.route('/getjson')
-# def getjson():
-#     c = {}
-#     c['name'] = 'Thomas Street', 'James Street', 'Stephens Green', 'Christchurch Place', 'Excise Walk', 'Fownes Street Upper', 'Custom House'  
-#     c['number']= 1,2,3,4,5,6,7
-#     c['available_bikes'] = '20','26','29','0','15','21','11'
-#     c['free_stands'] = '13','14','15', '0','10','16','8'
-#     c['lat'] = 53.3496, 53.3535, 53.336, 53.3434, 53.3478, 53.3446, 53.3483
-#     c['lng'] = -6.2782, -6.26531,-6.26298, -6.27012, -6.24424, -6.26337, -6.25466
-#     return jsonify(c=c)
+
