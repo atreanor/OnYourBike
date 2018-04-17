@@ -75,6 +75,8 @@ def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_d
         pass
 
 
+
+
 def insert_jdc_flask(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, lat, lng, banking, bonus):
 
     sql_flask = ('INSERT INTO onyourbikemysql.JCD_flask'
