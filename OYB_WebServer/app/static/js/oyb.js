@@ -56,10 +56,7 @@
           });
           map.fitBounds(bounds);
         });
-         
-      
-      
-      
+     
       
   } // end initMap
      
@@ -135,8 +132,6 @@ console.log( "complete" );
    infowindow.setContent(content);
    infowindow.open(map, this);
 });
-          
-    
        
       }   // end function attachContent         
                
@@ -159,9 +154,7 @@ function off() {
 
 
 function displayWeather(){
-     
 
-    
      $.getJSON($SCRIPT_ROOT + '/getweather', function(data)
                {
      console.log("success", data);
@@ -173,11 +166,10 @@ function displayWeather(){
          var temp = data.weather[0].temp;
          var tempmin = data.weather[0].temp_min;
          
-         var weathercontent = "The weather in Dublin: <br><br>" + main + ". Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
+         var weathercontent = "The weather in Dublin: <br><h3>" + main + "</h3> Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
          
          document.getElementById("overlay").innerHTML = weathercontent;
-         
-         
+             
          
      })// end function data
          .done(function() {

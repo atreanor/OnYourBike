@@ -14,11 +14,7 @@ from sqlalchemy import create_engine
 #from instance import config
 
 #from config import *  
-USER="Admin"
-PASSWORD="UCD_2018"
-URI="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com"
-PORT="3306"
-DB = "onyourbikemysql"
+
 
 
 # three database connect/close connection functions:

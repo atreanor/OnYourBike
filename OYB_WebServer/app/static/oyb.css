@@ -2,11 +2,13 @@ body {
     background-color: gainsboro;
 }
 
+/*
 h2 {
 font-style: italic;
 text-align: center;
 font-size: 2vw;
 color:black;}
+*/
 
 
 p, h1, h2 {font-family: 'Jura', Times, serif; margin-left: 7vw;}
