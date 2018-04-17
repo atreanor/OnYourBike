@@ -7,6 +7,8 @@
     var map = new google.maps.Map(document.getElementById('map'),mapOptions);
     createMarkers(map);
     
+      
+      
       var input = document.getElementById('pac-input');
       
       // The following code from googlemaps tutorial adds a search box and formats it so that a marker will appear on our map to tell user where the street they are looking for is
@@ -158,14 +160,13 @@ function displayWeather(){
                {
      console.log("success", data);
    
+
          
-         
-         
-         var main = data.w.description.main;
-         var desc = data.w.description.description;
-         var icon = data.w.description.icon;
-         var temp = data.w.temp;
-         var tempmin = data.w.tempmin;
+         var main = data.weather[0].w_d_main;
+         var desc = data.weather[0].w_description;
+         //var icon = data.weather[0].icon;
+         var temp = data.weather[0].temp;
+         var tempmin = data.weather[0].temp_min;
          
          var weathercontent = "The weather in Dublin: <br><br>" + main + ". Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
          

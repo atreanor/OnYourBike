@@ -63,15 +63,28 @@ def getStations():
 
 
 
-
 @app.route('/getweather')
 def getweather():
-    w = {}
-    w['description'] = {"main":"clouds","description":"overcast clouds","icon":"04n"} 
-    w['temp']= 12
-    w['tempmin'] = 7
-    return jsonify(w=w)
+    engine = get_db()
+    weather = []
+    rows = engine.execute("SELECT w_d_main, w_description, temp, temp_min, OYB_timestamp FROM OpenWeatherMap.OWM_current WHERE OYB_timestamp =(SELECT MAX(OYB_timestamp) FROM OpenWeatherMap.OWM_current);")
+    for row in rows:
+        weather.append(dict(row))
+    return jsonify(weather=weather)
 
+
+
+
+# @app.route('/getweather')
+# def getweather():
+#     engine = get_db()
+#     weather = []
+#     rows = engine.execute("SELECT ..... FROM .... ;")
+#     w = {}
+#     w['description'] = {"main":"clouds","description":"overcast clouds","icon":"04n"} 
+#     w['temp']= 12
+#     w['tempmin'] = 7
+#     return jsonify(w=w)
 
 
 
