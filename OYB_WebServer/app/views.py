@@ -14,11 +14,11 @@ from sqlalchemy import create_engine
 #from instance import config
 
 #from config import *  
-
-
-
-
-
+USER="Admin"
+PASSWORD="UCD_2018"
+URI="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com"
+PORT="3306"
+DB = "onyourbikemysql"
 
 
 # three database connect/close connection functions:
@@ -43,7 +43,6 @@ def close_connection(exception):
         db.close()
 
 
-
 #Flask functions to query DB and return jsonified version of query results
 @app.route('/')
 def index():
@@ -61,8 +60,6 @@ def getStations():
         info.append(dict(row))
     return jsonify(info=info)
 
-
-
 @app.route('/getweather')
 def getweather():
     engine = get_db()
@@ -74,47 +71,5 @@ def getweather():
 
 
 
-
-# @app.route('/getweather')
-# def getweather():
-#     engine = get_db()
-#     weather = []
-#     rows = engine.execute("SELECT ..... FROM .... ;")
-#     w = {}
-#     w['description'] = {"main":"clouds","description":"overcast clouds","icon":"04n"} 
-#     w['temp']= 12
-#     w['tempmin'] = 7
-#     return jsonify(w=w)
-
-
-
-
-
-# def getStationInfo():
-#     ''' method to retrieve a larger data set to populate additional station info & on a refresh of the app '''
-#     #create connection with database on RDS
-#     engine = get_db()
-#     
-#     # initialise list
-#     info = []
-#     # MySQL query to retrieve data
-#     rows = engine.execute("SELECT number, address, banking, status, bike_stands, available_bike_stands, available_bikes, last_update FROM JCD_dynamicdata, JCD_staticdata WHERE number.JCD_dynamic_data = number.JCD_static_data;")
-#     for row in rows:
-#         info.append(dict(row))
-#     return jsonify(info=info)
-#     
-# 
-# def getWeather():
-#     ''' method to retrieve weather data on launch of app  '''
-#     #create connection with database on RDS
-#     engine = get_db()
-#      
-#     # initialise list
-#     weather = []
-#     # MySQL query to retrieve data
-#     rows = engine.execute("SELECT ..... FROM .... ;")
-#     for row in rows:
-#         weather.append(dict(row))
-#     return jsonify(weather=weather)
 
 

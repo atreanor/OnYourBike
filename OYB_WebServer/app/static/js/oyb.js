@@ -68,7 +68,11 @@ var infowindow = new google.maps.InfoWindow();
             
  function createMarkers(map){
      
-     $.getJSON('http://127.0.0.1:5000/getStations', function(data)
+     
+//     $.getJSON('http://127.0.0.1:5000/getStations', function(data)
+     
+     
+     $.getJSON($SCRIPT_ROOT + '/getStations', function(data)
                {
          
          console.log("success", data);
@@ -156,11 +160,12 @@ function off() {
 
 function displayWeather(){
      
-     $.getJSON('http://127.0.0.1:5000/getweather', function(data)
+
+    
+     $.getJSON($SCRIPT_ROOT + '/getweather', function(data)
                {
      console.log("success", data);
    
-
          
          var main = data.weather[0].w_d_main;
          var desc = data.weather[0].w_description;
