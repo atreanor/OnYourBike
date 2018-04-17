@@ -34,9 +34,9 @@ def inserter_dynamic(a, b, c, d, e, f):
     avail=d
     availbikes=e
     last=f
-    sql = ("INSERT INTO onyourbikemysql.JCD_dynamic_data"
-           "(number, status, bike_stands, available_bike_stands, available_bikes, last_update)"
-           "VALUES ('%d', '%s', '%d', '%d', '%d', '%s' )" %
+    sql = ('INSERT INTO onyourbikemysql.JCD_dynamic_data'
+           '(number, status, bike_stands, available_bike_stands, available_bikes, last_update)'
+           'VALUES ("%d", "%s", "%d", "%d", "%d", "%s" )' %
            (num, status, bikestands, avail, availbikes, last))
     try:
         cur.execute(sql)
