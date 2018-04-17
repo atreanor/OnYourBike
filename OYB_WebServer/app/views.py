@@ -1,9 +1,5 @@
-from flask import render_template
-from flask import Flask
-from flask import jsonify
-from flask import g
-from app import app
-from app import model
+from flask import Flask, render_template, jsonify, g 
+from app import app, model
 import json
 import simplejson
 #import sqlalchemy
@@ -66,6 +62,19 @@ def getweather():
     return jsonify(weather=weather)
 
 
+@app.route("/<int:number>")
+def getGraphData(number):
+    ''' method to retrieve graph info for station selected on map, station number will be 
+    passed as an argument into SQL statement to retrieve data specific to that station '''
+    engine = get_db()
+    graphData = []
+    rows = engine.execute("SELECT available_bike_stands, available_bikes, OYB_timestamp FROM JCD_dynamic_data, WHERE number={};".format(number))
+    for row in rows:
+        graphData.append(dict(row))
+    return jsonify(graphData = graphData)
+        
+        
+        
 
 
 
