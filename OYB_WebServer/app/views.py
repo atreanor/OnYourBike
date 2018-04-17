@@ -62,13 +62,13 @@ def getweather():
     return jsonify(weather=weather)
 
 
-@app.route("/current/<int:number>")
+@app.route("/<int:number>")
 def getGraphData(number):
     ''' method to retrieve graph info for station selected on map, station number will be 
     passed as an argument into SQL statement to retrieve data specific to that station '''
     engine = get_db()
     graphData = []
-    rows = engine.execute("SELECT available_bike_stands, available_bikes, FROM JCD_dynamic_data, WHERE number={};".format(number))
+    rows = engine.execute("SELECT available_bike_stands, available_bikes, OYB_timestamp FROM JCD_dynamic_data, WHERE number={};".format(number))
     for row in rows:
         graphData.append(dict(row))
     return jsonify(graphData = graphData)
