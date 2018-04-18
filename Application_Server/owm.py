@@ -14,7 +14,7 @@ logf = open("OWM.log", "w")
 
 # This function initializes the owm_scrape class:
 def owm_connect():
-    owm_key = "7d5c9d444be46f6321b67dc89e8c7bf1" # API key for Open Weather Map
+    owm_key = "350d70da9c80ab41ceec02a84094004d" # API key for Open Weather Map
     owm_city = "Dublin"
     owm_country = "ie"
     return OpenWeatherMap(owm_key, owm_city, owm_country)
@@ -131,6 +131,7 @@ class OpenWeatherMap:
     def owm_scheduler(self):
         while True:
             try:
+                sleep(10)
                 self.owm_request_current()
                 # Sleep 5 is required to not accidentally violate OWM T&C
                 sleep(10)

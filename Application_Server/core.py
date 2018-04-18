@@ -37,4 +37,4 @@ def weather():
     y.owm_scheduler()
 
 if __name__ == "__main__":
-    sys.exit()
+    sys.exit(weather())
