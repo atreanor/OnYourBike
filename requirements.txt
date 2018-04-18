@@ -38,6 +38,9 @@ pytest-runner==3.0
 python-dateutil==2.7.0
 pytz==2018.3
 requests==2.18.4
+flask-platform==0.1.0
+Flask-SQLAlchemy==2.3.2
+Flask==0.12.2
 six==1.11.0
 snowballstemmer==1.2.1
 Sphinx==1.7.1
@@ -45,3 +48,5 @@ sphinxcontrib-websupport==1.0.1
 typing==3.6.4
 urllib3==1.22
 Werkzeug==0.14.1
+jsonschema==2.6.0
+SQLAlchemy==1.2.6
