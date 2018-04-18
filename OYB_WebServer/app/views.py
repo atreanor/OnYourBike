@@ -10,7 +10,11 @@ from sqlalchemy import create_engine
 #from instance import config
 
 #from config import *  
-
+USER="Admin"
+PASSWORD="UCD_2018"
+URI="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com"
+PORT="3306"
+DB = "onyourbikemysql"
 
 
 # three database connect/close connection functions:
@@ -56,22 +60,22 @@ def getStations():
 def getweather():
     engine = get_db()
     weather = []
-    rows = engine.execute("SELECT w_d_main, w_description, temp, temp_min, OYB_timestamp FROM OpenWeatherMap.OWM_current WHERE OYB_timestamp =(SELECT MAX(OYB_timestamp) FROM OpenWeatherMap.OWM_current);")
+    rows = engine.execute("SELECT w_d_main, w_description, temp, temp_min, w_d_icon, OYB_timestamp FROM OpenWeatherMap.OWM_current WHERE OYB_timestamp =(SELECT MAX(OYB_timestamp) FROM OpenWeatherMap.OWM_current);")
     for row in rows:
         weather.append(dict(row))
     return jsonify(weather=weather)
 
 
-@app.route("/available/<int:number>")
-def getGraphData(number):
-    ''' method to retrieve station data specific to the selected on map, station number will be 
-    passed as an argument into SQL statement to retrieve data specific to that station '''
-    engine = get_db()
-    data = []
-    rows = engine.execute("SELECT available_bikes, available_bike_stands, OYB_timestamp FROM JCD_dynamic_data, WHERE number={};".format(number))
-    for row in rows:
-        graphData.append(dict(row))
-    return jsonify(available = data)
+# @app.route("/available/<int:number>")
+# def getGraphData(number):
+#     ''' method to retrieve station data specific to the selected on map, station number will be 
+#     passed as an argument into SQL statement to retrieve data specific to that station '''
+#     engine = get_db()
+#     data = []
+#     rows = engine.execute("SELECT available_bikes, available_bike_stands, OYB_timestamp FROM JCD_dynamic_data, WHERE number={};".format(number))
+#     for row in rows:
+#         graphData.append(dict(row))
+#     return jsonify(available = data)
         
         
         

@@ -128,6 +128,10 @@ function off() {
     document.getElementById("overlay").style.display = "none";
 }
 
+
+
+
+
 function displayWeather(){
 
      $.getJSON($SCRIPT_ROOT + '/getweather', function(data)
@@ -137,11 +141,14 @@ function displayWeather(){
          
          var main = data.weather[0].w_d_main;
          var desc = data.weather[0].w_description;
-         //var icon = data.weather[0].icon;
          var temp = data.weather[0].temp;
          var tempmin = data.weather[0].temp_min;
+         var icon = data.weather[0].w_d_icon;
+         console.log(typeof icon);
          
-         var weathercontent = "The weather in Dublin: <br><h3>" + main + "</h3> Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
+         var weathercontent = "The weather in Dublin: <br><h3>" + main + 
+             "</h3><img height = '90px' src='http://openweathermap.org/img/w/" + icon + ".png'><br>"+
+             "Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
          
          document.getElementById("overlay").innerHTML = weathercontent;
              
@@ -162,40 +169,40 @@ console.log( "complete" );
 
 
 
-function createGraph(map){
- // function to create & populate graph with data from the josonify     
-
- 	$.getJSON($SCRIPT_ROOT + '/available/<int:number>', function(data) {
-         
-        console.log("success", data);
-        var size = Object.keys(data.info).length; // get size of data for loop
-           
-        for (var i = 0; i < size; i++)  {                           
-            //var name = data.info[i].name;
-            var available_bikes = data.info[i].available_bikes; 
-         	var available_stands = data.info[i].available_bike_stands;
-         	var time = data.info[i].OYB_timestamp;   
-                        
-          }); 
-                        
-        attachContent(marker, name, available_bikes, free_stands, number);
-       
-            } 
-     
-         
-     })
-         .done(function() {
-console.log( "second success" );
-})
-  .fail(function() {
-console.log( "error" );
-})   
-     
-  .always(function() {
-console.log( "complete" );
-});   
-     
- }
+//function createGraph(map){
+// // function to create & populate graph with data from the josonify     
+//
+// 	$.getJSON($SCRIPT_ROOT + '/available/<int:number>', function(data) {
+//         
+//        console.log("success", data);
+//        var size = Object.keys(data.info).length; // get size of data for loop
+//           
+//        for (var i = 0; i < size; i++)  {                           
+//            //var name = data.info[i].name;
+//            var available_bikes = data.info[i].available_bikes; 
+//         	var available_stands = data.info[i].available_bike_stands;
+//         	var time = data.info[i].OYB_timestamp;   
+//                        
+//          }); 
+//                        
+//        attachContent(marker, name, available_bikes, free_stands, number);
+//       
+//            } 
+//     
+//         
+//     })
+//         .done(function() {
+//console.log( "second success" );
+//})
+//  .fail(function() {
+//console.log( "error" );
+//})   
+//     
+//  .always(function() {
+//console.log( "complete" );
+//});   
+//     
+// }
 
 
 
