@@ -68,7 +68,8 @@ class Bike_scraper:
             self.d_bike_stands = (i['bike_stands'])
             self.d_available_bike_stands = (i['available_bike_stands'])
             self.d_available_bikes = (i['available_bikes'])
-            self.d_last_update = (i['last_update'])
+            self.d_last_update = datetime.datetime.fromtimestamp((i['last_update']) / 1000)
+
             # Execute insert function:
             self.execute_flask_insert()
         return 0
@@ -104,8 +105,8 @@ class Bike_scraper:
                 json_response = self.scrape_jcdecaux()
                 sleep(5)
                 self.parse_dynamic(json_response)
-                # Execute every 5 minutes  (300 seconds)
-                sleep(300)
+                # Execute every 1 hour  (300 seconds)
+                sleep(3600)
 
             except Exception as e:
                 logf.write(str(e))
@@ -120,9 +121,11 @@ class Bike_scraper:
                 print("JCD Flask scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
                 json_response = self.scrape_jcdecaux()
                 sleep(5)
+                databaser.truncate_JCD_Flask_table()
+                sleep(5)
                 self.parse_flask(json_response)
-                # Execute every 12 hours  (43200 seconds)
-                sleep(43200)
+                # Execute every 5 minutes  (300 seconds)
+                sleep(300)
 
             except Exception as e:
                 logf.write(str(e))
