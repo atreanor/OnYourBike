@@ -47,7 +47,7 @@ class Bike_scraper:
         contract = self.contract
         api_url = "https://api.jcdecaux.com/vls/v1/stations?contract="+self.contract+"&apiKey="+self.apikey+""
         response = requests.get(api_url)
-        json_response = json.loads(response.content)
+        json_response = json.loads(response.content.decode('utf-8'))
         print("JCD response:", response.status_code)
         return json_response
 
@@ -99,6 +99,7 @@ class Bike_scraper:
 
         while True:
             try:
+                sleep(5)
                 print("JCD Dynamic scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
                 json_response = self.scrape_jcdecaux()
                 print("Class instance created")

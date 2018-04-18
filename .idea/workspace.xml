@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e38aec31-4528-4ad2-9af3-34c0664bde0e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application_Server/JCDecaux.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/JCDecaux.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application_Server/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/core.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application_Server/databaser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application_Server/databaser.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,8 +25,8 @@
       <file leaf-file-name="JCDecaux.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application_Server/JCDecaux.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="106" column="46" selection-start-line="106" selection-start-column="46" selection-end-line="106" selection-end-column="46" />
+            <state relative-caret-position="426">
+              <caret line="49" column="67" selection-start-line="49" selection-start-column="67" selection-end-line="49" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -111,7 +108,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="98" />
     <option name="y" value="89" />
     <option name="width" value="2419" />
@@ -703,8 +700,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application_Server/JCDecaux.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="106" column="46" selection-start-line="106" selection-start-column="46" selection-end-line="106" selection-end-column="46" />
+        <state relative-caret-position="426">
+          <caret line="49" column="67" selection-start-line="49" selection-start-column="67" selection-end-line="49" selection-end-column="67" />
         </state>
       </provider>
     </entry>
