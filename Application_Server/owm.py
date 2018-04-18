@@ -14,7 +14,7 @@ logf = open("OWM.log", "w")
 
 # This function initializes the owm_scrape class:
 def owm_connect():
-    owm_key = "66040549d2cc38abfa2a0be1019ad3b5" # API key for Open Weather Map
+    owm_key = "350d70da9c80ab41ceec02a84094004d" # API key for Open Weather Map
     owm_city = "Dublin"
     owm_country = "ie"
     return OpenWeatherMap(owm_key, owm_city, owm_country)
@@ -93,7 +93,7 @@ class OpenWeatherMap:
         api_url = "http://api.openweathermap.org/data/2.5/weather?q="+self._owm_city+","\
                   + ","+self._owm_country+"&appid="+self._owm_key+"&units=metric"
         response = requests.get(api_url)
-        self.owm_json = json.loads(response.content)
+        self.owm_json = json.loads(response.content.decode('utf-8'))
         print("Response received from Open Weather Map:", response.status_code)
         return None
 
@@ -131,9 +131,10 @@ class OpenWeatherMap:
     def owm_scheduler(self):
         while True:
             try:
+                sleep(10)
                 self.owm_request_current()
                 # Sleep 5 is required to not accidentally violate OWM T&C
-                sleep(5)
+                sleep(10)
                 self.owm_parse_current()
                 print("Parsed!")
                 databaser.insert_owm_current(self.clouds, self.name, self.visibility, self.w_d_main, self.w_d_id, self.w_d_icon, self.w_description, self.coord_lat, self.coord_long, self.owm_dt, self.id, self.humidity, self.pressure, self.temp, self.temp_min, self.temp_max, self.city, self.sys_country, self.sys_id, self.sys_message, self.sys_sunrise_dt, self.sys_sunset_dt, self.cod)
