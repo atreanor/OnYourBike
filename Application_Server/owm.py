@@ -93,7 +93,7 @@ class OpenWeatherMap:
         api_url = "http://api.openweathermap.org/data/2.5/weather?q="+self._owm_city+","\
                   + ","+self._owm_country+"&appid="+self._owm_key+"&units=metric"
         response = requests.get(api_url)
-        self.owm_json = json.loads(response.content)
+        self.owm_json = json.loads(response.content.decode('utf-8'))
         print("Response received from Open Weather Map:", response.status_code)
         return None
 
