@@ -1,27 +1,23 @@
       // NB map code and marker code and are all adapted from googlemaps api tutorial code
   function initMap() {
-      var centre = new google.maps.LatLng(53.34,-6.26);      
-      var mapOptions = {
-        zoom: 14,
-        center: centre};
-    var map = new google.maps.Map(document.getElementById('map'),mapOptions);
-    createMarkers(map);
+    	var centre = new google.maps.LatLng(53.34,-6.26);      
+      	var mapOptions = {zoom: 14, center: centre};
+    	var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+    	createMarkers(map);
     
-      
-      
-      var input = document.getElementById('pac-input');
+		var input = document.getElementById('pac-input');
       
       // The following code from googlemaps tutorial adds a search box and formats it so that a marker will appear on our map to tell user where the street they are looking for is
-      var searchBox = new google.maps.places.SearchBox(input);
+      	var searchBox = new google.maps.places.SearchBox(input);
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
-      var markers = [];
+      	var markers = [];
         searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
+       	var places = searchBox.getPlaces();
 
-          if (places.length == 0) {
-            return; }
+       	if (places.length == 0) {
+        	return; }
           markers.forEach(function(marker) {
             marker.setMap(null);
           });
@@ -63,13 +59,10 @@
 
 var infowindow = new google.maps.InfoWindow();
             
- function createMarkers(map){
-     
+function createMarkers(map){
      
 //     $.getJSON('http://127.0.0.1:5000/getStations', function(data)
-     
-     
-     $.getJSON($SCRIPT_ROOT + '/getStations', function(data)
+ 	$.getJSON($SCRIPT_ROOT + '/getStations', function(data)
                {
          
          console.log("success", data);
@@ -80,27 +73,21 @@ var infowindow = new google.maps.InfoWindow();
             for (var i = 0; i < size; i++)  
             {                           
             var name = data.info[i].name;   
-             var available_bikes = data.info[i].available_bikes;
-         var free_stands = data.info[i].available_bike_stands;
-         var lat = data.info[i].lat;
-         var lng = data.info[i].lng;
-         var number = data.info[i].number;   
-                
-
-               var marker = new google.maps.Marker({
+            var available_bikes = data.info[i].available_bikes;
+         	var free_stands = data.info[i].available_bike_stands;
+         	var lat = data.info[i].lat;
+         	var lng = data.info[i].lng;
+         	var number = data.info[i].number;   
+            var marker = new google.maps.Marker({
             position: {
                 lat:lat,
                 lng:lng   
             }, // end position brackets
             map: map
           }); 
-                
-      
-                
+                        
         attachContent(marker, name, available_bikes, free_stands, number);
-
-            
-                
+       
             } // end for loop
      
          
@@ -118,10 +105,7 @@ console.log( "complete" );
      
  }// end function createMarkers
             
-
-
-
-
+            
 //       Attaches an info window to a marker with the provided station info. When the
 //      marker is clicked, the info window will open with the station info.
       function attachContent(marker, name, avbikes, freestands, number) {
@@ -134,11 +118,7 @@ console.log( "complete" );
 });
        
       }   // end function attachContent         
-               
-       
-                      
-                           
-                           
+                                     
   
 function on() {
     document.getElementById("overlay").style.display = "block";
@@ -147,11 +127,6 @@ function on() {
 function off() {
     document.getElementById("overlay").style.display = "none";
 }
-
-
-
-
-
 
 function displayWeather(){
 
@@ -186,6 +161,41 @@ console.log( "complete" );
  }//
 
 
+
+function createGraph(map){
+ // function to create & populate graph with data from the josonify     
+
+ 	$.getJSON($SCRIPT_ROOT + '/available/<int:number>', function(data) {
+         
+        console.log("success", data);
+        var size = Object.keys(data.info).length; // get size of data for loop
+           
+        for (var i = 0; i < size; i++)  {                           
+            //var name = data.info[i].name;
+            var available_bikes = data.info[i].available_bikes; 
+         	var available_stands = data.info[i].available_bike_stands;
+         	var time = data.info[i].OYB_timestamp;   
+                        
+          }); 
+                        
+        attachContent(marker, name, available_bikes, free_stands, number);
+       
+            } 
+     
+         
+     })
+         .done(function() {
+console.log( "second success" );
+})
+  .fail(function() {
+console.log( "error" );
+})   
+     
+  .always(function() {
+console.log( "complete" );
+});   
+     
+ }
 
 
 
