@@ -101,8 +101,10 @@ class Bike_scraper:
             try:
                 print("JCD Dynamic scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
                 json_response = self.scrape_jcdecaux()
+                print("Class instance created")
                 sleep(5)
                 self.parse_dynamic(json_response)
+                print("Parsed and SQL Executed")
                 # Execute every 1 hour  (3600 seconds)
 
                 sleep(3600)

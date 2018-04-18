@@ -11,6 +11,7 @@ from Application_Server import owm
 
 print("Welcome to OnYourBike's Application Server!!!")
 
+
 def bikes_flask():
     # Call the MYSQL database connection function:
     databaser.connector()
@@ -18,6 +19,7 @@ def bikes_flask():
     jcd_flask = JCDecaux.JCDecaux_scrape_init()
     #start the jdc_flask_scheduler:
     jcd_flask.jcd_flask_scheduler()
+
 
 def bikes_dynamic():
     print("JCDecaux Dynamic Table Scheduler:")
@@ -28,6 +30,7 @@ def bikes_dynamic():
     # Start the dynamic scheduler:
     dynamic.jcd_d_scheduler()
 
+
 def weather():
 
     # Call the MYSQL database connection function:
@@ -37,4 +40,4 @@ def weather():
     y.owm_scheduler()
 
 if __name__ == "__main__":
-    sys.exit(weather())
+    sys.exit(bikes_dynamic())

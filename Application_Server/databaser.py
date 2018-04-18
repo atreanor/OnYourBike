@@ -8,7 +8,7 @@ def connector():
 
     while True:
         try:
-            cnx = mysql.connector.connect(user='[insert]', password='[insert]', host="[insert]")
+            cnx = mysql.connector.connect(user='Admin', password='UCD_2018', host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com")
 
             print("Connected to Database Server (AWS RDS)")
             global cur
