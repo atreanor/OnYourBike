@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, g 
 from app import app, model
 import json
-import simplejson
+
 #import sqlalchemy
 #from flask.ext.sqlalchemy import SQLAlchemy
 #from flask_sqlalchemy import SQLAlchemy

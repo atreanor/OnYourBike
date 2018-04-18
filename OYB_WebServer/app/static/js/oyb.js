@@ -111,8 +111,10 @@ console.log( "complete" );
 //      marker is clicked, the info window will open with the station info.
       function attachContent(marker, name, avbikes, freestands, number) {
 
-                  var content =  "<b>Station: </b>" + name + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands
+                  var content =  "<b>Station: </b>" + name + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands + "<br><button onclick='chartFunction()'>More info</button>";
      
+          
+          
         google.maps.event.addListener(marker, 'click', function() {
    infowindow.setContent(content);
    infowindow.open(map, this);
@@ -168,6 +170,8 @@ console.log( "complete" );
      
  }//
 
+
+function chartFunction(){alert("CHART FUNCTION!!!");}
 
 
 //function createGraph(map){

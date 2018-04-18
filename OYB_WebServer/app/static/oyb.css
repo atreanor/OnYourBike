@@ -58,16 +58,17 @@ button
     background-color: white;
   font-family : 'Jura', Arial;
   font-size   : 100%;
-    padding: 5px 32px;
+    padding: 5px 25px;
     text-decoration: none;
     display: inline-block;
 /*    margin-bottom: 2vw;*/
-    font-size: 16px;
+    font-size: 15px;
     font-style: bold;
-    width: 25vw;
-    max-height: 7vw;
+    width: 12vw;
+    max-height: 4vw;
     position: relative;
-    margin-left:35%;
+    margin-top:1vw;
+   
 /*           z-index: -1; */
 }
 
