@@ -15,6 +15,7 @@
            position: fixed;
            z-index: 0;
            display:block;
+           flex: 0 0 75%;
         
        }
     </style>
@@ -48,6 +49,9 @@ $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     
   <body>
       
+<!--      <div id="weatherhere"></div>-->
+      
+      
      <h1> {{ title }}</h1>
       
 <!--
@@ -58,11 +62,16 @@ $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
       
       
       
-      <br><br><br>
+      <br>
       
+      
+      <div id="wrapper">
+          <div id="map"></div>
+          <div id="weatherhere"></div>
+</div>
      
       
-    <div id="map"></div>
+<!--    <div id="map"></div>-->
       
       <br>
       <p><b>  Type in a streetname or area below to see it on the map</b> </p>

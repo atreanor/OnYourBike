@@ -72,6 +72,22 @@ button
 }
 
 
+#weatherhere{
+    background-color: rgba(0,0,0,0.8);
+    max-width: 15vw;
+    font-family: 'jura', arial;
+    color: white;
+    font-size: 20px;
+    padding: 5px 32px;
+    flex: 1;
+    
+}
+
+#wrapper {
+  display: flex;
+}
+
+
 /*NB I (Sheena Davitt) created the style below for an overlay in my PHP project for web development last term */
 #overlay {
     background-color: rgba(0,0,0,0.8); 

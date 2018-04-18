@@ -4,6 +4,7 @@
       	var mapOptions = {zoom: 14, center: centre};
     	var map = new google.maps.Map(document.getElementById('map'),mapOptions);
     	createMarkers(map);
+      displayWeather();
     
 		var input = document.getElementById('pac-input');
       
@@ -150,8 +151,8 @@ function displayWeather(){
              "</h3><img height = '90px' src='http://openweathermap.org/img/w/" + icon + ".png'><br>"+
              "Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
          
-         document.getElementById("overlay").innerHTML = weathercontent;
-             
+         //document.getElementById("overlay").innerHTML = weathercontent;
+          document.getElementById("weatherhere").innerHTML = weathercontent;   
          
      })// end function data
          .done(function() {
