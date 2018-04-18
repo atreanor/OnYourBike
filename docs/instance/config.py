@@ -1,6 +1,6 @@
 
 USER=""
 PASSWORD=""
-URI=""
-PORT=""
+URI="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com"
+PORT="3306"
 # DB=""
