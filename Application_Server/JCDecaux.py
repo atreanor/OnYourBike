@@ -53,7 +53,6 @@ class Bike_scraper:
 
     def parse_flask(self, json_response):
 
-        print("Length of dynamic json is ", len(json_response))
         for i in json_response:
             # Static variables
             self.number = (i['number'])
@@ -69,7 +68,6 @@ class Bike_scraper:
             self.d_available_bike_stands = (i['available_bike_stands'])
             self.d_available_bikes = (i['available_bikes'])
             self.d_last_update = datetime.datetime.fromtimestamp((i['last_update']) / 1000)
-
             # Execute insert function:
             self.execute_flask_insert()
         return 0
@@ -105,14 +103,15 @@ class Bike_scraper:
                 json_response = self.scrape_jcdecaux()
                 sleep(5)
                 self.parse_dynamic(json_response)
-                # Execute every 1 hour  (300 seconds)
+                # Execute every 1 hour  (3600 seconds)
+
                 sleep(3600)
 
             except Exception as e:
                 logf.write(str(e))
                 pass
 
-        return 0
+        return None
 
     def jcd_flask_scheduler(self):
 
@@ -131,4 +130,4 @@ class Bike_scraper:
                 logf.write(str(e))
                 pass
 
-            return 0
+        return 0

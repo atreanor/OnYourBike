@@ -99,7 +99,7 @@ def insert_jdc_flask(number, name, contract_name, status, bike_stands, available
     try:
         cur.execute(sql_flask)
         cnx.commit()
-        #print("insert_JCD_flask - SQL statement executed")
+        print("insert_JCD_flask - SQL statement executed")
 
     except Exception as e:
         # logf.write(str(e))
