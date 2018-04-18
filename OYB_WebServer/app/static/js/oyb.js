@@ -1,4 +1,3 @@
-
 function initMap() {
   // function to create & initialise Google map
   var centre = new google.maps.LatLng(53.34,-6.26);      
