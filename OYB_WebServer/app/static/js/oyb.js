@@ -62,7 +62,7 @@ var infowindow = new google.maps.InfoWindow();
 
 // -----------------------------------------------------------------------------            
 function createMarkers(map){
-//     $.getJSON('http://127.0.0.1:5000/getStations', function(data)
+
  	$.getJSON($SCRIPT_ROOT + '/getStations', function(data) {
     console.log("success", data);
     var size = Object.keys(data.info).length;
@@ -98,13 +98,12 @@ function createMarkers(map){
 // Attaches an info window to a marker with the provided station info. When the
 // marker is clicked, the info window will open with the station info.
 function attachContent(marker, name, avbikes, freestands, number) {
-  var content =  "<b>Station: </b>" + name + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands + "<br><button onclick='chartFunction()'>More info</button>";
+  var content =  "<b>Station: </b>" + name + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands + "<br><button onclick='createGraph(" + number + ")'>More info</button>";
      
   google.maps.event.addListener(marker, 'click', function() {
   infowindow.setContent(content);
-  // *** this will invoke createGraph function below using the station no. 
-  // selected by user ***
-  createGraph(number);
+
+  
   infowindow.open(map, this);
   });
        
@@ -132,10 +131,11 @@ function displayWeather(){
     "</h3><img height = '90px' src='http://openweathermap.org/img/w/" + icon + ".png'><br>"+
     "Description: " + desc + "<br>Temperature: " + temp + "<br>"+ "Minimum temperature: " + tempmin;
          
-    //document.getElementById("overlay").innerHTML = weathercontent;
+
     document.getElementById("weatherhere").innerHTML = weathercontent;   
-         
-  })// end function data
+      
+  })
+    // end function data
   .done(function() { console.log( "second success" );
   })
   .fail(function() { console.log( "error" );
@@ -145,52 +145,7 @@ function displayWeather(){
      
 }// end function displayWeather
 
-// --------------------------------------------------------------------------
-// *** NOT SURE WE NEED THIS, WILL MAKE A DECISION ONCE WE TEST CURRENT CODE
-function chartFunction(){alert("CHART FUNCTION!!!");}
 
-// --------------------------------------------------------------------------
-function createGraph(number) {
-  // *** function to invoke flask app getGraphData passing station number as arguement
-  // ***
-  $.getJSON($SCRIPT_ROOT + '/available/<int:number>', function(data)) {
-    console.log("success", data);
-    var size = Object.keys(data.info).length; 
-    var available_bikes = []
-    var available_stands = []
-    var time = []
-    for (var i = 0; i < size; i++) {
-      available_bikes.push(data.info[i].available_stands);
-      available_stands.push(data.info[i].available_stands);
-      time.push(data.info[i].time);
-    }// end for loop
-    drawChart([available_bikes, available_stands, time])
-  }// end jquery 
-  .done(function() { console.log( "second success" );
-  })
-  .fail(function() { console.log( "error" );
-  })
-  .always(function() { console.log( "complete" );
-  })
-} // end createGraph function
-
-// --------------------------------------------------------------------------
-// *** Google charts JS to create graph & display graph
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-var options = {
-  title: 'Station Occupancy',
-  hAxis: {title: 'time', titleTextStyle: {color: '#333'}},
-  vAxis: {minValue: 0}
-};
-var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-
-// --------------------------------------------------------------------------
-// *** function to draw chart on html page
-function drawChart(data) {
-  var graphdata = google.visualisation.arrayToDataTable(data);
-  chart.draw(grahpdata, options);
-}
 
 
 

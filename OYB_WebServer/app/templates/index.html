@@ -4,7 +4,7 @@
     <meta http-equiv="refresh" content="300" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-
+     
     <link rel='stylesheet' type="text/css" href='https://fonts.googleapis.com/css?family=Jura'>
     <link rel="stylesheet" href="../static/oyb.css">
 
@@ -20,12 +20,12 @@
         }
     </style>
       
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></scripT>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCJ3N808qMKwu32fTVlpUaG8K4GSPo4qs&libraries=places"></script>
-    <script type='text/javascript' language='javascript' src='../static/js/oyb.js'></script>
+    <script type='text/javascript' language='javascript' src='../static/js/oyb.js'>
     <script> $( document ).ready(function() { initMap(); }); </script> 
     <script type=text/javascript> $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; </script>
-
+      
   </head>
      
   <body>    
@@ -51,13 +51,7 @@
       
     <input id="pac-input" class="controls" type="text" placeholder="Search for a street">  
     <br><br>
-    // javascript for Graph
-    <br><br>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
 
-    <script type='text/javascript' language='javascript' src='../static/js/oyb.js'></script>
-    <!-- *** a div with the Google chart -->
     <div id="chart_div" style="width: 100%; height: 500px;"></div>  
      
   </body>
