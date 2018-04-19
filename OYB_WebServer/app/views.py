@@ -10,8 +10,11 @@ from sqlalchemy import create_engine
 #from instance import config
 
 #from config import *  
-USER=""
-PASSWORD=""
+
+
+
+USER="Admin"
+PASSWORD="UCD_2018"
 URI="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com"
 PORT="3306"
 DB = "onyourbikemysql"
@@ -51,7 +54,7 @@ def index():
 def getStations():
     engine = get_db()
     info = []
-    rows = engine.execute("SELECT name, number, available_bike_stands, available_bikes, lat, lng FROM JCD_flask")
+    rows = engine.execute("SELECT name, number, available_bike_stands, available_bikes, lat, lng FROM JCD_flask;")
     for row in rows:
         info.append(dict(row))
     return jsonify(info=info)
@@ -66,16 +69,16 @@ def getweather():
     return jsonify(weather=weather)
 
 
-@app.route("/available/<int:number>")
-def getGraphData(number):
-     ''' method to retrieve station data specific to the selected on map, station number will be 
-     passed as an argument into SQL statement to retrieve data specific to that station '''
-     engine = get_db()
-     data = []
-     rows = engine.execute("SELECT available_bikes, available_bike_stands, OYB_timestamp FROM JCD_dynamic_data, WHERE number={};".format(number))
-     for row in rows:
-         data.append(dict(row))
-     return jsonify(available = data)
+# @app.route("/available/<int:number>")
+# def getGraphData(number):
+#      ''' method to retrieve station data specific to the selected on map, station number will be 
+#      passed as an argument into SQL statement to retrieve data specific to that station '''
+#      engine = get_db()
+#      data = []
+#      rows = engine.execute("SELECT available_bikes, available_bike_stands, OYB_timestamp FROM JCD_dynamic_data, WHERE number={};".format(number))
+#      for row in rows:
+#          data.append(dict(row))
+#      return jsonify(available = data)
         
         
         

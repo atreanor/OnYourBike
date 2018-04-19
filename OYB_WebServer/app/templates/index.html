@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,21 +23,28 @@
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCJ3N808qMKwu32fTVlpUaG8K4GSPo4qs&libraries=places"></script>
-    <script type='text/javascript' language='javascript' src='../static/js/oyb.js'>
+      
+    <script type='text/javascript' language='javascript' src='../static/js/oyb.js'></script>
+        
     <script> $( document ).ready(function() { initMap(); }); </script> 
     <script type=text/javascript> $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; </script>
+      
+<!--      script below is for googlecharts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['bar']});
+  
+</script>  
+      
+      
       
   </head>
      
   <body>    
-    <!--      <div id="weatherhere"></div>-->
+    
     <h1> {{ title }}</h1>
       
-    <!--
-    <div id="overlay" onclick="off()"><div id="text"></div></div>
-
-    <button onclick="on(); displayWeather()"> Get current weather</button>
-    -->
+    
     <br>
     <div id="wrapper">
     <div id="map"></div>
@@ -44,7 +52,6 @@
     </div>
      
       
-    <!--    <div id="map"></div>-->
       
     <br>
     <p><b>  Type in a streetname or area below to see it on the map</b> </p>
@@ -52,7 +59,8 @@
     <input id="pac-input" class="controls" type="text" placeholder="Search for a street">  
     <br><br>
 
-    <div id="chart_div" style="width: 100%; height: 500px;"></div>  
+ <!-- Identify where the chart should be drawn. -->
+  <div id="myPieChart"/>
      
   </body>
 

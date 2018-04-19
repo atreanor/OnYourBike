@@ -6,6 +6,7 @@ function initMap() {
   createMarkers(map);
   displayWeather();
     
+    
 	var input = document.getElementById('pac-input');
       
   // The following code adds a search box & formats it so that a marker will 
@@ -98,7 +99,9 @@ function createMarkers(map){
 // Attaches an info window to a marker with the provided station info. When the
 // marker is clicked, the info window will open with the station info.
 function attachContent(marker, name, avbikes, freestands, number) {
-  var content =  "<b>Station: </b>" + name + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands + "<br><button onclick='createGraph(" + number + ")'>More info</button>";
+  var content =  "<b>Station: </b>" + name + "<br>" + "<b>Station No: </b>" + number + "<br><b>Available bikes: </b>" + avbikes + "<br>"+ "<b>Free stands: </b>" + freestands + "<br><button onclick='drawChart(" + number + ")'>More info</button>";
+    
+    
      
   google.maps.event.addListener(marker, 'click', function() {
   infowindow.setContent(content);
@@ -109,10 +112,7 @@ function attachContent(marker, name, avbikes, freestands, number) {
        
 } // end function attachContent         
                                       
-function on() { document.getElementById("overlay").style.display = "block";
-}
-function off() { document.getElementById("overlay").style.display = "none";
-}
+
 
 //---------------------------------------------------------------------------
 // function to display weather.
@@ -144,6 +144,34 @@ function displayWeather(){
   });   
      
 }// end function displayWeather
+
+
+
+
+// from google charts tutorial
+
+
+    function drawChart(number) {
+        var data = google.visualization.arrayToDataTable([
+          ['Available Bikes', 'Available Stands'],
+          [number, 55]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('myPieChart'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    
+ 
+
+
 
 
 
