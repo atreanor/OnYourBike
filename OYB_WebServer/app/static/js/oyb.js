@@ -61,7 +61,8 @@ function initMap() {
 
 var infowindow = new google.maps.InfoWindow();
 
-// -----------------------------------------------------------------------------            
+// -----------------------------------------------------------------------------   
+// The following code creates the markers. It also calls the 'attachContent' function, which  places content on the infowindow
 function createMarkers(map){
 
  	$.getJSON($SCRIPT_ROOT + '/getStations', function(data) {
@@ -148,7 +149,7 @@ function displayWeather(){
 
 
 
-// from google charts tutorial
+// from google charts tutorial - basic chart showing number of bike station (activated by button on infowindow relating to that station)
 
 
     function drawChart(number) {
