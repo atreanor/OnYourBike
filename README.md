@@ -3,7 +3,7 @@
 
 ## Description:
 
-OnYourBike is a web application that combines bike usage information from [Dublin Bikes](http://www.dublinbikes.ie/) and weather data from <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a>.
+OnYourBike is a web application that combines bike usage information from  <a href="http://www.dublinbikes.ie/" target="_blank">Dublin Bikes</a> and weather data from <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a>.
 
 OnYourBike consists of three main components:
 
