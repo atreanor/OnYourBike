@@ -18,10 +18,11 @@ The Application Server is a Python package. It can be installed by logging onto 
 
 ### OYB_Database_Server
 
-The database contains three tables.
+Create the following tables on your database server:
 
+*JCD_dynamic_data* - Can be created by executing the JCD_dynamic_data.sql create statement
 
-JCD_dynamic_data - execute the JCD_dynamic_data.sql create statement
-JCD_flask - execute the JCD_flask.sql create statement
-OWM_current - execute the OWM_current.sql create statement
+*JCD_flask* - Can be created by executing the JCD_flask.sql create statement
+
+*OWM_current* - Can be created by executing the OWM_current.sql create statement
 
