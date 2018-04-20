@@ -3,6 +3,8 @@ import MySQLdb
 from time import sleep
 import mysql.connector
 
+
+# set up db connection, create cursor object that other methods can access
 def connector():
     global cnx
 
@@ -26,7 +28,7 @@ def connector():
             sleep(30)
             pass
 
-
+# insert into the JCD_dynamic_data table the results returned from api request to JCDecaux
 def inserter_dynamic(a, b, c, d, e, f):
     num=a
     status=b
@@ -46,7 +48,7 @@ def inserter_dynamic(a, b, c, d, e, f):
         cnx.rollback()
         pass
 
-
+# insert into the OWM weather table on our RDS the results from api request to OpenWeatherMap
 def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod):
 
     sql_weather = ("INSERT INTO OpenWeatherMap.OWM_current"
@@ -74,7 +76,7 @@ def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_d
         print("Exception - Insert_owm__current: ", e)
         pass
 
-
+# empty out JCD_flask_table 
 def truncate_JCD_Flask_table():
 
     try:
@@ -88,6 +90,7 @@ def truncate_JCD_Flask_table():
         print("Exception - Truncate JCD Flask table: ", e)
         pass
 
+ # populate JDC_flask table with dublin bikes info returned by api request to JCDecaux
 def insert_jdc_flask(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, lat, lng, banking, bonus):
     sql_flask = ('INSERT INTO onyourbikemysql.JCD_flask'
                    '(number, name, contract_name, status, bike_stands, available_bike_stands,available_bikes, last_update, address, lat, lng, banking, bonus)'
