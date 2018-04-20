@@ -42,7 +42,7 @@ def close_connection(exception):
         db.close()
 
 
-#Flask functions to query DB and return jsonified version of query results
+#Flask functions to render template of index.html
 @app.route('/')
 def index():
     a = {}
@@ -50,6 +50,7 @@ def index():
     jsonify(a=a)
     return render_template("index.html", **a)
 
+#Flask function to query DB for updated station info and return jsonified version of query results
 @app.route('/getStations')
 def getStations():
     engine = get_db()
@@ -59,6 +60,7 @@ def getStations():
         info.append(dict(row))
     return jsonify(info=info)
 
+#Flask function to query DB for updated weather info and return jsonified version of query results
 @app.route('/getweather')
 def getweather():
     engine = get_db()
@@ -68,7 +70,7 @@ def getweather():
         weather.append(dict(row))
     return jsonify(weather=weather)
 
-
+# early version of flask function to return graph showing occupancy information
 # @app.route("/available/<int:number>")
 # def getGraphData(number):
 #      ''' method to retrieve station data specific to the selected on map, station number will be 
