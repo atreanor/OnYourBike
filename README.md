@@ -1,8 +1,25 @@
 # OnYourBike
 
+
 ## Description:
 
+OnYourBike is a web application that combines bike usage information from [Dublin Bikes](http://www.dublinbikes.ie/) and weather data from [OpenWeatherMap](https://openweathermap.org/).
+
+OnYourBike consists of three main components:
+
+- A python package that contains schedulers that to scrape data, parse data and execute SQL insert statements
+  - This can be found in the "Application_Server" folder
+  - Classes are in object-oriented style
+- The flask application:
+  - Contains a combination of python, javascript, html and css
+  - This can be found in the "OYB_Web_Server" folder
+- A database server 
+  - This can be created by executing the SQL create statements in the docs/SQL folder
+  
+ 
 ## Installation instructions:
+
+Each component can be installed by following the following instructions:
 
 ### Application server
 
@@ -16,7 +33,7 @@ The Application Server is a Python package. It can be installed by logging onto 
 
 *bikes_flask* - Executes the bikes_flask function in the core.py file's main function.
 
-#### Note
+##### Note
 
 On a linux server, each entry point can be run as a background process by using the ampersand sign (&). The screen command can be used to create an environment that runs when the SSH connection to the server is terminated.
 
@@ -46,5 +63,11 @@ Open the Flask app directory (OnYourBike) and export the flask app run.py file:
 
 Start the webserver (Nginx using gunicorn):
 `gunicorn --bind 0.0.0.0:8000 run:app`
+
+### Requirements
+
+Requirements can found in the requirements.txt file.
+
+These can be installed on Linux with pip by typing `pip install -r requirements.txt`
 
 
