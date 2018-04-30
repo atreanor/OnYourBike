@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, g 
+from flask import Flask, render_template, jsonify, g
 from app import app, model
 import json
 
@@ -13,22 +13,22 @@ from sqlalchemy import create_engine
 
 
 
-USER="Admin"
-PASSWORD="UCD_2018"
-URI="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com"
+USER=""
+PASSWORD=""
+URI=""
 PORT="3306"
 DB = "onyourbikemysql"
 
 
 # three database connect/close connection functions:
 def connect_to_database():
-    ''' method to connect to database ''' 
+    """ method to connect to database """ 
     #return engine = create_engine("mysql+mysqldb://{}@{}:{}/{}".format(config.USER, config.PASSWORD, config.URI, config.PORT, config.DB), echo=True)
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URI, PORT, DB), echo=True)
     return engine 
 
 def get_db():
-    ''' method to get database '''
+    """ method to get database """
     db = getattr(g, 'onyourbikemysql', None)
     if db is None:
         db = g._database = connect_to_database()
@@ -36,7 +36,7 @@ def get_db():
 
 @app.teardown_appcontext
 def close_connection(exception):
-    ''' method to close connection with database '''
+    """ method to close connection with database """
     db = getattr(g, 'onyourbikemysql', None)
     if db is not None:
         db.close()
@@ -53,6 +53,7 @@ def index():
 #Flask function to query DB for updated station info and return jsonified version of query results
 @app.route('/getStations')
 def getStations():
+    """ method to retrieve station data """
     engine = get_db()
     info = []
     rows = engine.execute("SELECT name, number, available_bike_stands, available_bikes, lat, lng FROM JCD_flask;")
@@ -63,6 +64,7 @@ def getStations():
 #Flask function to query DB for updated weather info and return jsonified version of query results
 @app.route('/getweather')
 def getweather():
+    """ method to retrieve weather data """
     engine = get_db()
     weather = []
     rows = engine.execute("SELECT w_d_main, w_description, temp, temp_min, w_d_icon, OYB_timestamp FROM OpenWeatherMap.OWM_current WHERE OYB_timestamp =(SELECT MAX(OYB_timestamp) FROM OpenWeatherMap.OWM_current);")
@@ -73,8 +75,8 @@ def getweather():
 # early version of flask function to return graph showing occupancy information
 # @app.route("/available/<int:number>")
 # def getGraphData(number):
-#      ''' method to retrieve station data specific to the selected on map, station number will be 
-#      passed as an argument into SQL statement to retrieve data specific to that station '''
+#      """ method to retrieve station data specific to the selected on map, station number will be 
+#      passed as an argument into SQL statement to retrieve data specific to that station """
 #      engine = get_db()
 #      data = []
 #      rows = engine.execute("SELECT available_bikes, available_bike_stands, OYB_timestamp FROM JCD_dynamic_data, WHERE number={};".format(number))
