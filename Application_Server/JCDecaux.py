@@ -7,23 +7,29 @@ from time import sleep
 
 import datetime
 
- # This will always return the same object
+# This will always return the same object
 sys.path.append('.')
 
-#Open a log file:
+# Open a log file:
 logf = open("JCDecaux.log", "w")
 
-# This function initializes the Bike_scraper class:
 
-def JCDecaux_scrape_init ():
+def jc_decaux_scrape_init():
+    """ method to initialise Bike_scraper """
+    
     contract = "Dublin"
-    apikey = "e8823ad03eaa6b4b5b80b84203e56c1740394008" # API key for JC Decaux
-    return Bike_scraper(contract, apikey)
+    apikey = "e8823ad03eaa6b4b5b80b84203e56c1740394008"  # API key for JC Decaux
+    return BikeScraper(contract, apikey)
 
-class Bike_scraper:
+
+class BikeScraper:
+    """ class to represent API connection & scraping of bike data from JC Decaux """
+    
     json_response = None
 
     def __init__(self, contract, apikey):
+        """ constructor initialises variables """
+
         self.contract = contract
         self.apikey = apikey
         # class variables for static weather:
@@ -44,6 +50,8 @@ class Bike_scraper:
         self.d_last_update = None
 
     def scrape_jcdecaux(self):
+        """ method to scrape data returning a json object """
+        
         contract = self.contract
         api_url = "https://api.jcdecaux.com/vls/v1/stations?contract="+self.contract+"&apiKey="+self.apikey+""
         response = requests.get(api_url)
@@ -52,6 +60,7 @@ class Bike_scraper:
         return json_response
 
     def parse_flask(self, json_response):
+        """ method to parse flask json object & assign values to variables"""
 
         for i in json_response:
             # Static variables
@@ -73,11 +82,16 @@ class Bike_scraper:
         return 0
 
     def execute_flask_insert(self):
-        databaser.insert_jdc_flask(self.number, self.s_name, self.s_contract_name, self.d_status, self.d_bike_stands, self.d_available_bike_stands, self.d_available_bikes, self.d_last_update, self.s_address, self.s_lat, self.s_lng, self.s_banking, self.s_bonus)
+        """ method to insert data to database """
+        
+        databaser.insert_jdc_flask(self.number, self.s_name, self.s_contract_name, self.d_status, self.d_bike_stands,
+                                   self.d_available_bike_stands, self.d_available_bikes, self.d_last_update,
+                                   self.s_address, self.s_lat, self.s_lng, self.s_banking, self.s_bonus)
 
         return 0
 
     def parse_dynamic(self, json_response):
+        """ method to parse dynamic json object & assign values to variables """
         for i in json_response:
             # Static variables
             self.number = (i['number'])
@@ -88,24 +102,24 @@ class Bike_scraper:
             self.d_last_update = (i['last_update'])
             lu_sec = self.d_last_update / 1000
             lu_dt = datetime.datetime.fromtimestamp(lu_sec)
-            # print(number, status, bike_stands, available_bike_stands, available_bikes, lu_dt)
-            databaser.inserter_dynamic(self.number, self.d_status, self.d_bike_stands, self.d_available_bike_stands, self.d_available_bikes, lu_dt)
-        print("Dynamic data - Parsed and SQL executed")
+            databaser.inserter_dynamic(self.number, self.d_status, self.d_bike_stands, self.d_available_bike_stands,
+                                       self.d_available_bikes, lu_dt)
 
         return 0
 
     def jcd_d_scheduler(self):
-        print("JCDecaux Dynamic Scheduler:")
+        """ method to schedule scraping at a time interval """
+        # print("JCDecaux Dynamic Scheduler:")
 
         while True:
             try:
                 sleep(5)
                 print("JCD Dynamic scheduler:", datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
                 json_response = self.scrape_jcdecaux()
-                print("Class instance created")
+                # print("Class instance created")
                 sleep(5)
                 self.parse_dynamic(json_response)
-                print("Parsed and SQL Executed")
+                # print("Parsed and SQL Executed")
                 # Execute every 1 hour  (3600 seconds)
 
                 sleep(3600)
@@ -114,9 +128,8 @@ class Bike_scraper:
                 logf.write(str(e))
                 pass
 
-        return None
-
     def jcd_flask_scheduler(self):
+        """ method to schedule flask scraping at a time interval """
 
         while True:
             try:
@@ -132,5 +145,3 @@ class Bike_scraper:
             except Exception as e:
                 logf.write(str(e))
                 pass
-
-        return 0

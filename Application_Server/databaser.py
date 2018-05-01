@@ -4,13 +4,14 @@ from time import sleep
 import mysql.connector
 
 
-# set up db connection, create cursor object that other methods can access
 def connector():
-    global cnx
+    """ method to make a connection with database """
 
+    global cnx
     while True:
         try:
-            cnx = mysql.connector.connect(user='', password='', host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com")
+            cnx = mysql.connector.connect(user='', password='',
+                                          host="onyourbikemysql.cquggrydnjcx.eu-west-1.rds.amazonaws.com")
 
             print("Connected to Database Server (AWS RDS)")
             global cur
@@ -28,14 +29,16 @@ def connector():
             sleep(30)
             pass
 
-# insert into the JCD_dynamic_data table the results returned from api request to JCDecaux
+
 def inserter_dynamic(a, b, c, d, e, f):
-    num=a
-    status=b
-    bikestands=c
-    avail=d
-    availbikes=e
-    last=f
+    """ method to insert data to the JCD_dynamic_data table """
+
+    num = a
+    status = b
+    bikestands = c
+    avail = d
+    availbikes = e
+    last = f
     sql = ('INSERT INTO onyourbikemysql.JCD_dynamic_data'
            '(number, status, bike_stands, available_bike_stands, available_bikes, last_update)'
            'VALUES ("%d", "%s", "%d", "%d", "%d", "%s" )' %
@@ -48,8 +51,8 @@ def inserter_dynamic(a, b, c, d, e, f):
         cnx.rollback()
         pass
 
-# insert into the OWM weather table on our RDS the results from api request to OpenWeatherMap
 def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod):
+    """ method to insert open weather map data into database """
 
     sql_weather = ("INSERT INTO OpenWeatherMap.OWM_current"
                    "(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_description, coord_lat, coord_long, owm_dt, id, humidity, pressure, temp, temp_min, temp_max, city, sys_country, sys_id, sys_message, sys_sunrise_dt, sys_sunset_dt, cod)"
@@ -76,8 +79,8 @@ def insert_owm_current(clouds, name, visibility, w_d_main, w_d_id, w_d_icon, w_d
         print("Exception - Insert_owm__current: ", e)
         pass
 
-# empty out JCD_flask_table 
 def truncate_JCD_Flask_table():
+    """ method to truncate flask database table """
 
     try:
         cur.execute('TRUNCATE TABLE onyourbikemysql.JCD_flask')
@@ -90,10 +93,13 @@ def truncate_JCD_Flask_table():
         print("Exception - Truncate JCD Flask table: ", e)
         pass
 
- # populate JDC_flask table with dublin bikes info returned by api request to JCDecaux
-def insert_jdc_flask(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes, last_update, address, lat, lng, banking, bonus):
+def insert_jdc_flask(number, name, contract_name, status, bike_stands, available_bike_stands, available_bikes,
+                     last_update, address, lat, lng, banking, bonus):
+    """ method to insert bike data into database """
+
     sql_flask = ('INSERT INTO onyourbikemysql.JCD_flask'
-                   '(number, name, contract_name, status, bike_stands, available_bike_stands,available_bikes, last_update, address, lat, lng, banking, bonus)'
+                   '(number, name, contract_name, status, bike_stands, available_bike_stands,available_bikes, '
+                 'last_update, address, lat, lng, banking, bonus)'
                    'VALUES ("%d", "%s", "%s", "%s", "%d",'
                    '"%d", "%s", "%s", "%s",'
                    '"%f", "%f", "%d", "%d")' %

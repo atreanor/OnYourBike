@@ -12,15 +12,18 @@ sys.path.append('.')
 # Open a log file:
 logf = open("OWM.log", "w")
 
-# This function initializes the owm_scrape class:
+
 def owm_connect():
-    owm_key = "350d70da9c80ab41ceec02a84094004d" # API key for Open Weather Map
+    """ method to instaniate OpenWeatherMap with key, city & country """
+
+    owm_key = "350d70da9c80ab41ceec02a84094004d"  # API key for Open Weather Map
     owm_city = "Dublin"
     owm_country = "ie"
     return OpenWeatherMap(owm_key, owm_city, owm_country)
 
 
 class OpenWeatherMap:
+    """ class to represent """
 
     def __init__(self, owm_key, owm_city, owm_country):
         # Variables to store OWM connection data:
@@ -98,7 +101,7 @@ class OpenWeatherMap:
         return None
 
     def owm_parse_current(self):
-        self.clouds = self.owm_json['clouds'][('all')]
+        self.clouds = self.owm_json['clouds']['all']
         self.name = self.owm_json['name']
         self.visibility = self.owm_json['visibility']
         # Parse general weather description:
@@ -129,6 +132,8 @@ class OpenWeatherMap:
         return 0
 
     def owm_scheduler(self):
+        """ method to schedule parsing & insertion of Open Weather Map data into database """
+
         while True:
             try:
                 sleep(10)
@@ -137,7 +142,11 @@ class OpenWeatherMap:
                 sleep(10)
                 self.owm_parse_current()
                 print("Parsed!")
-                databaser.insert_owm_current(self.clouds, self.name, self.visibility, self.w_d_main, self.w_d_id, self.w_d_icon, self.w_description, self.coord_lat, self.coord_long, self.owm_dt, self.id, self.humidity, self.pressure, self.temp, self.temp_min, self.temp_max, self.city, self.sys_country, self.sys_id, self.sys_message, self.sys_sunrise_dt, self.sys_sunset_dt, self.cod)
+                databaser.insert_owm_current(self.clouds, self.name, self.visibility, self.w_d_main, self.w_d_id,
+                                             self.w_d_icon, self.w_description, self.coord_lat, self.coord_long,
+                                             self.owm_dt, self.id, self.humidity, self.pressure, self.temp,
+                                             self.temp_min, self.temp_max, self.city, self.sys_country, self.sys_id,
+                                             self.sys_message, self.sys_sunrise_dt, self.sys_sunset_dt, self.cod)
 
                 # Execute every 0.5 hours  (1800 seconds)
                 sleep(1800)
@@ -146,8 +155,3 @@ class OpenWeatherMap:
                 logf.write(str(e))
                 print("Exception: ", e)
             pass
-
-        return None
-
-
-

@@ -3,19 +3,19 @@ import sys
 
 sys.path.append('.')
 
-from Application_Server.JCDecaux import Bike_scraper
+from Application_Server.JCDecaux import BikeScraper
 
 
 class TestBasicFunction(unittest.TestCase):
 
     def test_scraper_constructor(self):
-        uut = Bike_scraper('mockContract', 'mockKey')
+        uut = BikeScraper('mockContract', 'mockKey')
         assert uut.contract == 'mockContract'
         assert uut.apikey == 'mockKey'
 
 
     def test_scrape_static(self):
-        uut = Bike_scraper('Dublin', 'e8823ad03eaa6b4b5b80b84203e56c1740394008')
+        uut = BikeScraper('Dublin', 'e8823ad03eaa6b4b5b80b84203e56c1740394008')
         returned = uut.scrape_static()
         self.assertTrue(isinstance(returned, list))
 
